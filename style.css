@@ -98,7 +98,7 @@ nav {
 
 nav a {
     font-size: 1.25rem;
-    letter-spacing: .25rem;
+    letter-spacing: .15rem;
     transition: color 0.2s ease;
     text-decoration: none;
     color: inherit;
@@ -315,56 +315,54 @@ h1 {
 }
 
 .about {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem 10rem;
 }
 
+.about-me {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 191, 255, 0.2);
+    border-radius: 20px;
+}
 
+.head-about {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    letter-spacing: 1px;
+    color: #22d3ee;
 
+}
 
+.about-para {
+    /* padding: 1rem 2rem; */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 200;
+    font-size: 1.1rem;
+    letter-spacing: .05rem;
+    line-height: 1.9;
+    max-width: 600px;
+    text-align: left;
+    color: #d1d5db;
+}
 
+.about-me-img {
+    height: 350px;
+    width: 350px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.about-content {
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
@@ -387,6 +385,8 @@ h1 {
         top: -20%;
         right: 2%;
     }
+
+
 }
 
 /* mobile */
