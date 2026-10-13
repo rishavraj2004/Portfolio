@@ -1,0 +1,178 @@
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem 5rem;
+  overflow: visible;
+}
+
+/* Ambient interactive subtle lighting reacting to cursor */
+.hero-light-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    650px circle at var(--mouse-x, 48%) var(--mouse-y, 32%),
+    rgba(255, 255, 255, 0.035),
+    transparent 65%
+  );
+  z-index: 1;
+}
+
+/* Centered content unit */
+.hero-content-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 auto;
+  width: fit-content;
+  animation: heroFadeIn 0.8s ease-out forwards;
+}
+
+/* Subtitle: "Web Developer" */
+.hero-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(1.4rem, 2.3vw, 2.15rem);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+  user-select: none;
+  display: flex;
+  align-items: center;
+}
+
+.subtitle-web {
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.subtitle-developer {
+  color: #7f8999;
+  font-weight: 400;
+  margin-left: 0.45rem;
+}
+
+/* Main Name Block */
+.hero-name-container {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  user-select: none;
+  font-size: clamp(5.5rem, 15vw, 13rem);
+  line-height: 0.88;
+}
+
+.hero-first-name {
+  font-family: var(--font-display);
+  font-size: 1em;
+  font-weight: 900;
+  color: #eaeaea;
+  letter-spacing: -0.035em;
+  line-height: 0.86;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+/* Overlapping script: "Raj" - positioned on the right slant of 'v' */
+.hero-last-name-script {
+  position: absolute;
+  right: -0.19em;
+  bottom: -0.1em;
+  font-family: 'Alex Brush', 'Great Vibes', cursive;
+  font-size: 0.62em;
+  font-weight: 400;
+  color: #76a86d;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.45));
+  z-index: 5;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.hero-name-container:hover .hero-last-name-script {
+  transform: scale(1.04);
+  color: #88be7d;
+}
+
+/* Resume Button: Rounded rectangle matching mockup */
+.hero-action-container {
+  margin-top: clamp(1.4rem, 2.4vw, 2.2rem);
+}
+
+.hero-resume-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.72rem 2.35rem;
+  border-radius: 15px; /* Subtle rounded rectangle matching mockup */
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #9da6b4;
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 1.2vw, 1.18rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+.hero-resume-btn:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.hero-resume-btn:active {
+  transform: translateY(0);
+}
+
+/* Keyframe animations */
+@keyframes heroFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .hero-section {
+    padding: 1rem 2rem 4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 1rem 1.25rem 3.5rem;
+  }
+
+  .hero-last-name-script {
+    right: -0.15em;
+    bottom: -0.08em;
+    font-size: 0.58em;
+  }
+
+  .hero-resume-btn {
+    padding: 0.65rem 2rem;
+    border-radius: 13px;
+  }
+}

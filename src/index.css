@@ -1,0 +1,81 @@
+:root {
+  --bg-dark: #0c0d10;
+  --text-white: #ffffff;
+  --text-primary: #eaebee;
+  --text-secondary: #7f8897;
+  --text-muted: #9aa2b1;
+  --accent-script: #76a36a;
+  --accent-glow: rgba(118, 163, 106, 0.25);
+  --btn-bg: rgba(255, 255, 255, 0.08);
+  --btn-border: rgba(255, 255, 255, 0.16);
+  --btn-hover-border: rgba(255, 255, 255, 0.35);
+  
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-script: 'Alex Brush', 'Great Vibes', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-image: url('/hero-bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0d10;
+}
+::-webkit-scrollbar-thumb {
+  background: #23272e;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333a44;
+}
+
+/* Selection */
+::selection {
+  background: rgba(118, 163, 106, 0.3);
+  color: #ffffff;
+}
