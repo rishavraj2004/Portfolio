@@ -241,11 +241,11 @@
 }
 
 /* ==============================================================
-   HOVER EFFECT ON WORD "RISHAV" ONLY:
-   Blanks the white filling, showing only the crisp white outline
+   HOVER EFFECT ON EACH INDIVIDUAL LETTER OF "RISHAV":
+   Only the hovered letter blanks its white fill and outlines.
+   The glowing dot of 'i' remains completely unaffected.
    ============================================================== */
-.hero-name-container:hover .letter,
-.hero-first-name:hover .letter {
+.letter:not(.letter-i):hover {
   background: transparent !important;
   -webkit-background-clip: unset !important;
   background-clip: unset !important;
@@ -254,26 +254,14 @@
   -webkit-text-stroke: 1.8px #ffffff;
 }
 
-.hero-name-container:hover .letter-i-stem,
-.hero-first-name:hover .letter-i-stem {
+/* On hovering 'i', only outline the stem - dot of 'i' remains untouched */
+.letter-i:hover .letter-i-stem {
   background: transparent !important;
   -webkit-background-clip: unset !important;
   background-clip: unset !important;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
   -webkit-text-stroke: 1.8px #ffffff;
-}
-
-.hero-name-container:hover .bulb-orb,
-.hero-first-name:hover .bulb-orb {
-  background: transparent !important;
-  border: 1.8px solid #ffffff;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.25);
-}
-
-.hero-name-container:hover .bulb-bloom,
-.hero-first-name:hover .bulb-bloom {
-  opacity: 0.1;
 }
 
 /* Overlapping script: "Raj" - in vibrant electric lime green matching reference */
