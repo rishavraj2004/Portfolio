@@ -24,9 +24,6 @@ export default function Hero() {
         '--mouse-y': `${mousePos.y}%`,
       }}
     >
-      {/* Ambient interactive subtle lighting */}
-      <div className="hero-light-glow" aria-hidden="true" />
-
       <div className="hero-content-wrapper">
         {/* Role Subtitle */}
         <div className="hero-subtitle">
@@ -36,12 +33,16 @@ export default function Hero() {
 
         {/* Big Name Typography with Glowing Bulb dot on 'i' */}
         <div className="hero-name-container">
+          {/* Background spotlight and illuminated noise behind the letters */}
+          <div className="hero-bulb-backdrop" aria-hidden="true">
+            <div className="spotlight-glow" />
+            <div className="spotlight-noise" />
+          </div>
+
           <h1 className="hero-first-name" aria-label="Rishav">
             <span className="letter letter-r">R</span>
             <span className="letter letter-i">
-              {/* Wide ambient background light cast by the bulb */}
-              <span className="bulb-ambient-light" aria-hidden="true" />
-              {/* Radial bloom and luminous haze */}
+              {/* Radial bloom immediately surrounding the bulb */}
               <span className="bulb-bloom" aria-hidden="true" />
               {/* Intense radiant bulb sphere */}
               <span className="bulb-orb" aria-hidden="true" />

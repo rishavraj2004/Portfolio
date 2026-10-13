@@ -6,22 +6,7 @@
   justify-content: center;
   padding: 1rem 2rem 5rem;
   overflow: visible;
-}
-
-/* Dynamic ambient interactive lighting reacting to cursor */
-.hero-light-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    650px circle at var(--mouse-x, 48%) var(--mouse-y, 32%),
-    rgba(255, 255, 255, 0.03),
-    transparent 65%
-  );
-  z-index: 1;
+  background: transparent;
 }
 
 /* Centered content wrapper */
@@ -52,14 +37,14 @@
 .subtitle-web {
   color: #ffffff;
   font-weight: 400;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
 .subtitle-developer {
-  color: #9aa3b2;
+  color: #adb6c6;
   font-weight: 400;
   margin-left: 0.45rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
 /* Main Name Block */
@@ -72,6 +57,67 @@
   line-height: 0.88;
 }
 
+/* ==============================================================
+   BACKDROP: SPOTLIGHT & NOISE REVEALED AROUND THE BULB OF 'i'
+   ============================================================== */
+.hero-bulb-backdrop {
+  position: absolute;
+  top: 0.12em;
+  left: 0.88em; /* Exactly centered at the bulb on the letter 'i' */
+  transform: translate(-50%, -50%);
+  width: 7.5em;
+  height: 7.5em;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Soft incandescent light glow on the subtle black background */
+.spotlight-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.32) 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.01) 54%,
+    transparent 68%
+  );
+  filter: blur(32px);
+  animation: ambientBreathe 4s ease-in-out infinite alternate;
+}
+
+/* Noisy texture revealed by the light, gently fading into subtle black */
+.spotlight-noise {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: url('/grain.png');
+  background-repeat: repeat;
+  background-size: 130px 130px;
+  -webkit-mask-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.72) 18%,
+    rgba(0, 0, 0, 0.32) 36%,
+    rgba(0, 0, 0, 0.08) 50%,
+    transparent 64%
+  );
+  mask-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.72) 18%,
+    rgba(0, 0, 0, 0.32) 36%,
+    rgba(0, 0, 0, 0.08) 50%,
+    transparent 64%
+  );
+  opacity: 0.44;
+  mix-blend-mode: screen;
+  animation: ambientBreathe 4s ease-in-out infinite alternate;
+}
+
+/* Big Display Name Text */
 .hero-first-name {
   font-family: var(--font-display);
   font-size: 1em;
@@ -82,6 +128,8 @@
   padding: 0;
   display: inline-flex;
   align-items: baseline;
+  position: relative;
+  z-index: 5;
 }
 
 /* Individual letter directional shading matching reference illumination */
@@ -116,28 +164,6 @@
 /* ==============================================================
    GLOWING BULB / ORB DOT THAT LIGHTS UP THE SURROUNDINGS
    ============================================================== */
-
-/* Wide ambient illumination scattering across the background behind text */
-.bulb-ambient-light {
-  position: absolute;
-  top: 0.12em;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 4.5em;
-  height: 4.5em;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.22) 0%,
-    rgba(255, 255, 255, 0.12) 30%,
-    rgba(255, 255, 255, 0.04) 55%,
-    transparent 75%
-  );
-  pointer-events: none;
-  z-index: -1; /* Placed behind letters so it illuminates the background */
-  filter: blur(28px);
-  animation: ambientBreathe 4s ease-in-out infinite alternate;
-}
 
 /* Radiant bloom and intense light aura */
 .bulb-bloom {
@@ -240,6 +266,8 @@
 /* Resume Button: Rounded rectangle matching mockup */
 .hero-action-container {
   margin-top: clamp(1.4rem, 2.4vw, 2.2rem);
+  position: relative;
+  z-index: 20;
 }
 
 .hero-resume-btn {
@@ -280,12 +308,12 @@
 /* Dynamic Bulb Keyframe Animations */
 @keyframes ambientBreathe {
   0% {
-    opacity: 0.85;
-    transform: translate(-50%, -50%) scale(0.96);
+    opacity: 0.88;
+    transform: scale(0.97);
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.04);
+    transform: scale(1.03);
   }
 }
 
