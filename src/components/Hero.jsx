@@ -73,6 +73,42 @@ export default function Hero() {
           </a>
         </div>
       </div>
+
+      {/* Scroll Down Indicator matching user reference */}
+      <a 
+        href="#about" 
+        className="hero-scroll-indicator"
+        id="scroll-down-btn"
+        aria-label="Scroll down"
+        onClick={(e) => {
+          e.preventDefault();
+          const nextSec = document.getElementById('about');
+          if (nextSec) {
+            nextSec.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.scrollBy({ top: window.innerHeight * 0.85, behavior: 'smooth' });
+          }
+        }}
+      >
+        <span className="scroll-text">SCROLL</span>
+        <svg 
+          className="scroll-chevron" 
+          width="16" 
+          height="10" 
+          viewBox="0 0 16 10" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path 
+            d="M2 2L8 8L14 2" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+          />
+        </svg>
+      </a>
     </section>
   );
 }

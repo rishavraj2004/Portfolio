@@ -395,4 +395,63 @@
     padding: 0.65rem 2rem;
     border-radius: 13px;
   }
+
+  .hero-scroll-indicator {
+    bottom: 1.25rem;
+  }
 }
+
+/* ==============================================================
+   SCROLL DOWN INDICATOR COMPONENT
+   ============================================================== */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  color: #929ba9;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 20;
+  user-select: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+  animation: scrollFloat 2.4s ease-in-out infinite;
+}
+
+.scroll-text {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-left: 0.28em; /* Offset letter-spacing so text is geometrically centered */
+  transition: color 0.25s ease;
+}
+
+.scroll-chevron {
+  width: 14px;
+  height: 8px;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.hero-scroll-indicator:hover {
+  color: #ffffff;
+}
+
+.hero-scroll-indicator:hover .scroll-chevron {
+  transform: translateY(3px);
+}
+
+@keyframes scrollFloat {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(6px);
+  }
+}
+
