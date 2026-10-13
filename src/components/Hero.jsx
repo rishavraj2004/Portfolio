@@ -6,7 +6,6 @@ export default function Hero() {
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      // Calculate mouse percentage across window for interactive light reflection
       const xPercent = (e.clientX / window.innerWidth) * 100;
       const yPercent = (e.clientY / window.innerHeight) * 100;
       setMousePos({ x: xPercent, y: yPercent });
@@ -15,11 +14,6 @@ export default function Hero() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  const handleResumeClick = () => {
-    // Open resume or trigger download
-    window.open('#resume', '_blank');
-  };
 
   return (
     <section 
@@ -30,7 +24,7 @@ export default function Hero() {
         '--mouse-y': `${mousePos.y}%`,
       }}
     >
-      {/* Dynamic ambient cursor illumination */}
+      {/* Ambient interactive subtle lighting */}
       <div className="hero-light-glow" aria-hidden="true" />
 
       <div className="hero-content-wrapper">
@@ -40,9 +34,26 @@ export default function Hero() {
           <span className="subtitle-developer">Developer</span>
         </div>
 
-        {/* Big Name Typography */}
+        {/* Big Name Typography with Glowing Bulb dot on 'i' */}
         <div className="hero-name-container">
-          <h1 className="hero-first-name">Rishav</h1>
+          <h1 className="hero-first-name" aria-label="Rishav">
+            <span className="letter letter-r">R</span>
+            <span className="letter letter-i">
+              {/* Wide ambient background light cast by the bulb */}
+              <span className="bulb-ambient-light" aria-hidden="true" />
+              {/* Radial bloom and luminous haze */}
+              <span className="bulb-bloom" aria-hidden="true" />
+              {/* Intense radiant bulb sphere */}
+              <span className="bulb-orb" aria-hidden="true" />
+              {/* Stem of the letter i */}
+              <span className="letter-i-stem">ı</span>
+            </span>
+            <span className="letter letter-s">s</span>
+            <span className="letter letter-h">h</span>
+            <span className="letter letter-a">a</span>
+            <span className="letter letter-v">v</span>
+          </h1>
+
           <span className="hero-last-name-script">Raj</span>
         </div>
 

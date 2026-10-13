@@ -8,7 +8,7 @@
   overflow: visible;
 }
 
-/* Ambient interactive subtle lighting reacting to cursor */
+/* Dynamic ambient interactive lighting reacting to cursor */
 .hero-light-glow {
   position: absolute;
   top: 0;
@@ -18,13 +18,13 @@
   pointer-events: none;
   background: radial-gradient(
     650px circle at var(--mouse-x, 48%) var(--mouse-y, 32%),
-    rgba(255, 255, 255, 0.035),
+    rgba(255, 255, 255, 0.03),
     transparent 65%
   );
   z-index: 1;
 }
 
-/* Centered content unit */
+/* Centered content wrapper */
 .hero-content-wrapper {
   position: relative;
   z-index: 10;
@@ -45,17 +45,21 @@
   user-select: none;
   display: flex;
   align-items: center;
+  position: relative;
+  z-index: 25;
 }
 
 .subtitle-web {
   color: #ffffff;
   font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .subtitle-developer {
-  color: #7f8999;
+  color: #9aa3b2;
   font-weight: 400;
   margin-left: 0.45rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 /* Main Name Block */
@@ -72,15 +76,146 @@
   font-family: var(--font-display);
   font-size: 1em;
   font-weight: 900;
-  color: #eaeaea;
   letter-spacing: -0.035em;
   line-height: 0.86;
   margin: 0;
   padding: 0;
-  display: inline-block;
+  display: inline-flex;
+  align-items: baseline;
 }
 
-/* Overlapping script: "Raj" - positioned on the right slant of 'v' */
+/* Individual letter directional shading matching reference illumination */
+.letter {
+  display: inline-block;
+  position: relative;
+  z-index: 5;
+}
+
+/* Letter 'R' - catching light on right edge facing the bulb */
+.letter-r {
+  background: linear-gradient(90deg, #a4acb9 0%, #c8ced8 45%, #f4f6fa 85%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Letter 'i' - container for the stem and the radiant glowing bulb */
+.letter-i {
+  position: relative;
+  display: inline-block;
+  z-index: 6;
+}
+
+.letter-i-stem {
+  display: inline-block;
+  background: linear-gradient(180deg, #ffffff 0%, #e6eaf2 50%, #cad1dc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+
+/* ==============================================================
+   GLOWING BULB / ORB DOT THAT LIGHTS UP THE SURROUNDINGS
+   ============================================================== */
+
+/* Wide ambient illumination scattering across the background behind text */
+.bulb-ambient-light {
+  position: absolute;
+  top: 0.12em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4.5em;
+  height: 4.5em;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.12) 30%,
+    rgba(255, 255, 255, 0.04) 55%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: -1; /* Placed behind letters so it illuminates the background */
+  filter: blur(28px);
+  animation: ambientBreathe 4s ease-in-out infinite alternate;
+}
+
+/* Radiant bloom and intense light aura */
+.bulb-bloom {
+  position: absolute;
+  top: 0.12em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.45) 35%,
+    rgba(255, 255, 255, 0.15) 60%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 10;
+  filter: blur(4px);
+  animation: bloomPulse 2.5s ease-in-out infinite alternate;
+}
+
+/* The actual glowing bulb/sphere orb */
+.bulb-orb {
+  position: absolute;
+  top: 0.12em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.32em;
+  height: 0.32em;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #ffffff 0%,
+    #ffffff 75%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  box-shadow:
+    0 0 14px 4px rgba(255, 255, 255, 1),
+    0 0 30px 10px rgba(255, 255, 255, 0.85),
+    0 0 60px 22px rgba(255, 255, 255, 0.5),
+    0 0 100px 40px rgba(255, 255, 255, 0.28),
+    0 0 160px 60px rgba(255, 255, 255, 0.12);
+  z-index: 12;
+  pointer-events: none;
+  animation: bulbFlicker 5s ease-in-out infinite;
+}
+
+/* Letter 's' - lit strongly on left side facing the glowing bulb */
+.letter-s {
+  background: linear-gradient(90deg, #ffffff 0%, #ffffff 35%, #e4e8f0 70%, #b8c0cc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Letter 'h' - smoothly lit falloff */
+.letter-h {
+  background: linear-gradient(90deg, #e0e5ed 0%, #c4cbda 50%, #a6afbd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Letter 'a' - shaded */
+.letter-a {
+  background: linear-gradient(90deg, #ccd3de 0%, #b2b9c7 50%, #98a1af 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Letter 'v' - shaded with subtle backlight */
+.letter-v {
+  background: linear-gradient(90deg, #b8c0cc 0%, #9ea6b5 60%, #8c94a2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Overlapping script: "Raj" - in vibrant electric lime green matching reference */
 .hero-last-name-script {
   position: absolute;
   right: -0.19em;
@@ -88,17 +223,18 @@
   font-family: 'Alex Brush', 'Great Vibes', cursive;
   font-size: 0.62em;
   font-weight: 400;
-  color: #76a86d;
+  color: #7ee81a;
   letter-spacing: 0.01em;
   pointer-events: none;
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.45));
-  z-index: 5;
-  transition: transform 0.3s ease, color 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(126, 232, 26, 0.45)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+  z-index: 15;
+  transition: transform 0.3s ease, color 0.3s ease, filter 0.3s ease;
 }
 
 .hero-name-container:hover .hero-last-name-script {
-  transform: scale(1.04);
-  color: #88be7d;
+  transform: scale(1.05);
+  color: #8eff24;
+  filter: drop-shadow(0 0 16px rgba(142, 255, 36, 0.65)) drop-shadow(0 4px 14px rgba(0, 0, 0, 0.8));
 }
 
 /* Resume Button: Rounded rectangle matching mockup */
@@ -111,7 +247,7 @@
   align-items: center;
   justify-content: center;
   padding: 0.72rem 2.35rem;
-  border-radius: 15px; /* Subtle rounded rectangle matching mockup */
+  border-radius: 15px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -141,7 +277,40 @@
   transform: translateY(0);
 }
 
-/* Keyframe animations */
+/* Dynamic Bulb Keyframe Animations */
+@keyframes ambientBreathe {
+  0% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+}
+
+@keyframes bloomPulse {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+@keyframes bulbFlicker {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.98;
+    transform: translate(-50%, -50%) scale(1.02);
+  }
+}
+
 @keyframes heroFadeIn {
   0% {
     opacity: 0;
