@@ -65,26 +65,25 @@
   top: 0.12em;
   left: 0.88em; /* Exactly centered at the bulb on the letter 'i' */
   transform: translate(-50%, -50%);
-  width: 7.5em;
-  height: 7.5em;
+  width: 2.2em;
+  height: 2.2em;
   pointer-events: none;
   z-index: 1;
 }
 
-/* Soft incandescent light glow on the subtle black background */
+/* Soft incandescent light glow on the subtle black background - tightly limited */
 .spotlight-glow {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.32) 0%,
-    rgba(255, 255, 255, 0.15) 20%,
-    rgba(255, 255, 255, 0.05) 40%,
-    rgba(255, 255, 255, 0.01) 54%,
-    transparent 68%
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(255, 255, 255, 0.18) 25%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 70%
   );
-  filter: blur(32px);
+  filter: blur(14px);
   animation: ambientBreathe 4s ease-in-out infinite alternate;
 }
 
@@ -95,24 +94,22 @@
   border-radius: 50%;
   background-image: url('/grain.png');
   background-repeat: repeat;
-  background-size: 130px 130px;
+  background-size: 110px 110px;
   -webkit-mask-image: radial-gradient(
     circle,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.72) 18%,
-    rgba(0, 0, 0, 0.32) 36%,
-    rgba(0, 0, 0, 0.08) 50%,
-    transparent 64%
+    rgba(0, 0, 0, 0.82) 22%,
+    rgba(0, 0, 0, 0.28) 48%,
+    transparent 68%
   );
   mask-image: radial-gradient(
     circle,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.72) 18%,
-    rgba(0, 0, 0, 0.32) 36%,
-    rgba(0, 0, 0, 0.08) 50%,
-    transparent 64%
+    rgba(0, 0, 0, 0.82) 22%,
+    rgba(0, 0, 0, 0.28) 48%,
+    transparent 68%
   );
-  opacity: 0.44;
+  opacity: 0.52;
   mix-blend-mode: screen;
   animation: ambientBreathe 4s ease-in-out infinite alternate;
 }
@@ -165,29 +162,29 @@
    GLOWING BULB / ORB DOT THAT LIGHTS UP THE SURROUNDINGS
    ============================================================== */
 
-/* Radiant bloom and intense light aura */
+/* Radiant bloom and intense light aura - compact and focused */
 .bulb-bloom {
   position: absolute;
   top: 0.12em;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1.2em;
-  height: 1.2em;
+  width: 0.65em;
+  height: 0.65em;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(255, 255, 255, 0.45) 35%,
-    rgba(255, 255, 255, 0.15) 60%,
-    transparent 80%
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.45) 40%,
+    rgba(255, 255, 255, 0.1) 70%,
+    transparent 85%
   );
   pointer-events: none;
   z-index: 10;
-  filter: blur(4px);
+  filter: blur(3px);
   animation: bloomPulse 2.5s ease-in-out infinite alternate;
 }
 
-/* The actual glowing bulb/sphere orb */
+/* The actual glowing bulb/sphere orb - tight luminous range */
 .bulb-orb {
   position: absolute;
   top: 0.12em;
@@ -203,11 +200,9 @@
     rgba(255, 255, 255, 0.95) 100%
   );
   box-shadow:
-    0 0 14px 4px rgba(255, 255, 255, 1),
-    0 0 30px 10px rgba(255, 255, 255, 0.85),
-    0 0 60px 22px rgba(255, 255, 255, 0.5),
-    0 0 100px 40px rgba(255, 255, 255, 0.28),
-    0 0 160px 60px rgba(255, 255, 255, 0.12);
+    0 0 8px 3px rgba(255, 255, 255, 1),
+    0 0 18px 6px rgba(255, 255, 255, 0.85),
+    0 0 32px 10px rgba(255, 255, 255, 0.4);
   z-index: 12;
   pointer-events: none;
   animation: bulbFlicker 5s ease-in-out infinite;
