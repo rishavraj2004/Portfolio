@@ -71,23 +71,22 @@
   z-index: 1;
 }
 
-/* Soft incandescent light glow on the subtle black background - gentle & appealing */
+/* Soft incandescent light glow on the subtle black background - gentle & unobtrusive */
 .spotlight-glow {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.18) 0%,
-    rgba(255, 255, 255, 0.08) 25%,
-    rgba(255, 255, 255, 0.02) 50%,
-    transparent 70%
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.03) 30%,
+    transparent 65%
   );
-  filter: blur(16px);
+  filter: blur(14px);
   animation: ambientBreathe 4s ease-in-out infinite alternate;
 }
 
-/* Noisy texture revealed gently by the light - subtle velvety grain */
+/* Noisy texture revealed gently by the light - subtle whisper grain */
 .spotlight-noise {
   position: absolute;
   inset: 0;
@@ -98,18 +97,18 @@
   -webkit-mask-image: radial-gradient(
     circle,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.75) 20%,
-    rgba(0, 0, 0, 0.22) 48%,
+    rgba(0, 0, 0, 0.72) 20%,
+    rgba(0, 0, 0, 0.2) 48%,
     transparent 68%
   );
   mask-image: radial-gradient(
     circle,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.75) 20%,
-    rgba(0, 0, 0, 0.22) 48%,
+    rgba(0, 0, 0, 0.72) 20%,
+    rgba(0, 0, 0, 0.2) 48%,
     transparent 68%
   );
-  opacity: 0.24;
+  opacity: 0.12;
   mix-blend-mode: screen;
   animation: ambientBreathe 4s ease-in-out infinite alternate;
 }
@@ -127,6 +126,7 @@
   align-items: baseline;
   position: relative;
   z-index: 5;
+  cursor: default;
 }
 
 /* Individual letter directional shading matching reference illumination */
@@ -134,6 +134,8 @@
   display: inline-block;
   position: relative;
   z-index: 5;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-text-stroke: 0px transparent;
 }
 
 /* Letter 'R' - soft light catching on right edge facing the bulb */
@@ -156,13 +158,15 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-text-stroke: 0px transparent;
 }
 
 /* ==============================================================
    GLOWING BULB / ORB DOT THAT LIGHTS UP THE SURROUNDINGS
    ============================================================== */
 
-/* Radiant bloom - soft, ethereal and non-blinding */
+/* Radiant bloom - very soft & subtle so it doesn't steal attention */
 .bulb-bloom {
   position: absolute;
   top: 0.12em;
@@ -173,18 +177,18 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.5) 0%,
-    rgba(255, 255, 255, 0.2) 35%,
-    rgba(255, 255, 255, 0.05) 65%,
-    transparent 85%
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    transparent 75%
   );
   pointer-events: none;
   z-index: 10;
   filter: blur(3px);
   animation: bloomPulse 2.5s ease-in-out infinite alternate;
+  transition: opacity 0.3s ease;
 }
 
-/* The actual glowing bulb/sphere orb - smooth luminous pearl */
+/* The actual glowing bulb/sphere orb - gentle pearl dot */
 .bulb-orb {
   position: absolute;
   top: 0.12em;
@@ -193,19 +197,19 @@
   width: 0.32em;
   height: 0.32em;
   border-radius: 50%;
+  box-sizing: border-box;
   background: radial-gradient(
     circle at 35% 32%,
     #ffffff 0%,
-    #f2f5f9 55%,
-    #dbe0e8 100%
+    #e8edf5 60%,
+    #cfd5e2 100%
   );
   box-shadow:
-    0 0 6px 1px rgba(255, 255, 255, 0.75),
-    0 0 14px 4px rgba(255, 255, 255, 0.35),
-    0 0 24px 8px rgba(255, 255, 255, 0.15);
+    0 0 4px 1px rgba(255, 255, 255, 0.4),
+    0 0 10px 2px rgba(255, 255, 255, 0.15);
   z-index: 12;
   pointer-events: none;
-  animation: bulbFlicker 5s ease-in-out infinite;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Letter 's' - lit smoothly on left side facing the glowing bulb */
@@ -234,6 +238,42 @@
   background: linear-gradient(90deg, #c2c9d4 0%, #acb4c0 60%, #98a0ad 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* ==============================================================
+   HOVER EFFECT ON WORD "RISHAV" ONLY:
+   Blanks the white filling, showing only the crisp white outline
+   ============================================================== */
+.hero-name-container:hover .letter,
+.hero-first-name:hover .letter {
+  background: transparent !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  -webkit-text-stroke: 1.8px #ffffff;
+}
+
+.hero-name-container:hover .letter-i-stem,
+.hero-first-name:hover .letter-i-stem {
+  background: transparent !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  -webkit-text-stroke: 1.8px #ffffff;
+}
+
+.hero-name-container:hover .bulb-orb,
+.hero-first-name:hover .bulb-orb {
+  background: transparent !important;
+  border: 1.8px solid #ffffff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.25);
+}
+
+.hero-name-container:hover .bulb-bloom,
+.hero-first-name:hover .bulb-bloom {
+  opacity: 0.1;
 }
 
 /* Overlapping script: "Raj" - in vibrant electric lime green matching reference */
