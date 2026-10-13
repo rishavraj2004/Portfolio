@@ -71,23 +71,23 @@
   z-index: 1;
 }
 
-/* Soft incandescent light glow on the subtle black background - tightly limited */
+/* Soft incandescent light glow on the subtle black background - gentle & appealing */
 .spotlight-glow {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.42) 0%,
-    rgba(255, 255, 255, 0.18) 25%,
-    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.08) 25%,
+    rgba(255, 255, 255, 0.02) 50%,
     transparent 70%
   );
-  filter: blur(14px);
+  filter: blur(16px);
   animation: ambientBreathe 4s ease-in-out infinite alternate;
 }
 
-/* Noisy texture revealed by the light, gently fading into subtle black */
+/* Noisy texture revealed gently by the light - subtle velvety grain */
 .spotlight-noise {
   position: absolute;
   inset: 0;
@@ -98,18 +98,18 @@
   -webkit-mask-image: radial-gradient(
     circle,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.82) 22%,
-    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.75) 20%,
+    rgba(0, 0, 0, 0.22) 48%,
     transparent 68%
   );
   mask-image: radial-gradient(
     circle,
     rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.82) 22%,
-    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.75) 20%,
+    rgba(0, 0, 0, 0.22) 48%,
     transparent 68%
   );
-  opacity: 0.52;
+  opacity: 0.24;
   mix-blend-mode: screen;
   animation: ambientBreathe 4s ease-in-out infinite alternate;
 }
@@ -136,9 +136,9 @@
   z-index: 5;
 }
 
-/* Letter 'R' - catching light on right edge facing the bulb */
+/* Letter 'R' - soft light catching on right edge facing the bulb */
 .letter-r {
-  background: linear-gradient(90deg, #a4acb9 0%, #c8ced8 45%, #f4f6fa 85%, #ffffff 100%);
+  background: linear-gradient(90deg, #b8bec9 0%, #d4dae4 45%, #f4f6fa 85%, #ffffff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -152,7 +152,7 @@
 
 .letter-i-stem {
   display: inline-block;
-  background: linear-gradient(180deg, #ffffff 0%, #e6eaf2 50%, #cad1dc 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #eaf0f7 50%, #d0d7e2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1;
@@ -162,7 +162,7 @@
    GLOWING BULB / ORB DOT THAT LIGHTS UP THE SURROUNDINGS
    ============================================================== */
 
-/* Radiant bloom and intense light aura - compact and focused */
+/* Radiant bloom - soft, ethereal and non-blinding */
 .bulb-bloom {
   position: absolute;
   top: 0.12em;
@@ -173,9 +173,9 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.45) 40%,
-    rgba(255, 255, 255, 0.1) 70%,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.2) 35%,
+    rgba(255, 255, 255, 0.05) 65%,
     transparent 85%
   );
   pointer-events: none;
@@ -184,7 +184,7 @@
   animation: bloomPulse 2.5s ease-in-out infinite alternate;
 }
 
-/* The actual glowing bulb/sphere orb - tight luminous range */
+/* The actual glowing bulb/sphere orb - smooth luminous pearl */
 .bulb-orb {
   position: absolute;
   top: 0.12em;
@@ -194,44 +194,44 @@
   height: 0.32em;
   border-radius: 50%;
   background: radial-gradient(
-    circle at 35% 35%,
+    circle at 35% 32%,
     #ffffff 0%,
-    #ffffff 75%,
-    rgba(255, 255, 255, 0.95) 100%
+    #f2f5f9 55%,
+    #dbe0e8 100%
   );
   box-shadow:
-    0 0 8px 3px rgba(255, 255, 255, 1),
-    0 0 18px 6px rgba(255, 255, 255, 0.85),
-    0 0 32px 10px rgba(255, 255, 255, 0.4);
+    0 0 6px 1px rgba(255, 255, 255, 0.75),
+    0 0 14px 4px rgba(255, 255, 255, 0.35),
+    0 0 24px 8px rgba(255, 255, 255, 0.15);
   z-index: 12;
   pointer-events: none;
   animation: bulbFlicker 5s ease-in-out infinite;
 }
 
-/* Letter 's' - lit strongly on left side facing the glowing bulb */
+/* Letter 's' - lit smoothly on left side facing the glowing bulb */
 .letter-s {
-  background: linear-gradient(90deg, #ffffff 0%, #ffffff 35%, #e4e8f0 70%, #b8c0cc 100%);
+  background: linear-gradient(90deg, #ffffff 0%, #f0f3f8 35%, #d6dbe4 70%, #bac2ce 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Letter 'h' - smoothly lit falloff */
 .letter-h {
-  background: linear-gradient(90deg, #e0e5ed 0%, #c4cbda 50%, #a6afbd 100%);
+  background: linear-gradient(90deg, #e4e8f0 0%, #cfd5e0 50%, #b8c0cc 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Letter 'a' - shaded */
 .letter-a {
-  background: linear-gradient(90deg, #ccd3de 0%, #b2b9c7 50%, #98a1af 100%);
+  background: linear-gradient(90deg, #d4d9e2 0%, #bec6d2 50%, #a8b0be 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Letter 'v' - shaded with subtle backlight */
 .letter-v {
-  background: linear-gradient(90deg, #b8c0cc 0%, #9ea6b5 60%, #8c94a2 100%);
+  background: linear-gradient(90deg, #c2c9d4 0%, #acb4c0 60%, #98a0ad 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
