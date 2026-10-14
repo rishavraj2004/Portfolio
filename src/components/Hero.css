@@ -74,6 +74,7 @@
   height: 2.2em;
   pointer-events: none;
   z-index: 1;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Soft incandescent light glow on the subtle black background - gentle & unobtrusive */
@@ -212,6 +213,7 @@
   box-shadow:
     0 0 4px 1px rgba(255, 255, 255, 0.4),
     0 0 10px 2px rgba(255, 255, 255, 0.15);
+  border: 1.8px solid transparent;
   z-index: 12;
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -247,10 +249,13 @@
 
 /* ==============================================================
    HOVER EFFECT ON EACH INDIVIDUAL LETTER OF "RISHAV":
-   Only the hovered letter blanks its white fill and outlines.
-   The glowing dot of 'i' remains completely unaffected.
+   - Hovering any letter blanks its fill and displays an outline.
+   - Hovering 'i' outlines both the stem and the circular dot of 'i'
+     as an unfilled outline, while turning OFF the glow & spotlight.
    ============================================================== */
-.letter:not(.letter-i):hover {
+.letter:not(.letter-i):hover,
+.letter-i:hover .letter-i-stem,
+.letter-i.i-hovered .letter-i-stem {
   background: transparent !important;
   -webkit-background-clip: unset !important;
   background-clip: unset !important;
@@ -259,14 +264,25 @@
   -webkit-text-stroke: 1.8px #ffffff;
 }
 
-/* On hovering 'i', only outline the stem - dot of 'i' remains untouched */
-.letter-i:hover .letter-i-stem {
+/* On hovering 'i': turn off the glowing bloom */
+.letter-i:hover .bulb-bloom,
+.letter-i.i-hovered .bulb-bloom {
+  opacity: 0 !important;
+  transform: translate(-50%, -50%) scale(0.6);
+}
+
+/* On hovering 'i': turn off background spotlight and illuminated noise */
+.hero-bulb-backdrop.glow-off,
+.hero-name-container:has(.letter-i:hover) .hero-bulb-backdrop {
+  opacity: 0 !important;
+}
+
+/* On hovering 'i': make the dot of 'i' unfilled and outlined */
+.letter-i:hover .bulb-orb,
+.letter-i.i-hovered .bulb-orb {
   background: transparent !important;
-  -webkit-background-clip: unset !important;
-  background-clip: unset !important;
-  -webkit-text-fill-color: transparent !important;
-  color: transparent !important;
-  -webkit-text-stroke: 1.8px #ffffff;
+  border-color: #ffffff !important;
+  box-shadow: none !important;
 }
 
 /* Overlapping script: "Raj" - in vibrant electric lime green matching reference */

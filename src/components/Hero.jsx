@@ -3,6 +3,7 @@ import './Hero.css';
 
 export default function Hero() {
   const [mousePos, setMousePos] = useState({ x: 50, y: 35 });
+  const [isIHovered, setIsIHovered] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -34,14 +35,18 @@ export default function Hero() {
         {/* Big Name Typography with Glowing Bulb dot on 'i' */}
         <div className="hero-name-container">
           {/* Background spotlight and illuminated noise behind the letters */}
-          <div className="hero-bulb-backdrop" aria-hidden="true">
+          <div className={`hero-bulb-backdrop ${isIHovered ? 'glow-off' : ''}`} aria-hidden="true">
             <div className="spotlight-glow" />
             <div className="spotlight-noise" />
           </div>
 
           <h1 className="hero-first-name" aria-label="Rishav">
             <span className="letter letter-r">R</span>
-            <span className="letter letter-i">
+            <span 
+              className={`letter letter-i ${isIHovered ? 'i-hovered' : ''}`}
+              onMouseEnter={() => setIsIHovered(true)}
+              onMouseLeave={() => setIsIHovered(false)}
+            >
               {/* Radial bloom immediately surrounding the bulb */}
               <span className="bulb-bloom" aria-hidden="true" />
               {/* Intense radiant bulb sphere */}
