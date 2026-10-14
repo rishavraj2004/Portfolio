@@ -56,15 +56,15 @@
   align-items: center;
   justify-content: center;
   border: 1.5px dashed rgba(220, 224, 230, 0.6);
-  padding: 1.35rem 3.6rem 1.05rem;
-  margin: 1.6rem auto 0;
+  padding: 2.2rem 5.2rem 2.6rem;
+  margin: 1.8rem auto 0;
   box-sizing: border-box;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .projects-bounding-box:hover {
   border-color: rgba(220, 224, 230, 0.9);
-  box-shadow: 0 0 28px rgba(138, 201, 38, 0.1);
+  box-shadow: 0 0 30px rgba(138, 201, 38, 0.12);
 }
 
 /* Control Handles on Bounding Box */
@@ -145,8 +145,8 @@
 /* "What i build" Cursive Script Badge overlapping top dashed line */
 .projects-script-badge {
   position: absolute;
-  top: -1.45rem;
-  left: 1.6rem;
+  top: -1.75rem;
+  left: 2.2rem;
   font-family: 'Alex Brush', 'Great Vibes', cursive;
   font-size: clamp(2.3rem, 4.3vw, 3.8rem);
   font-weight: 400;
@@ -169,7 +169,7 @@
   font-weight: 900;
   color: #8ac926;
   letter-spacing: -0.035em;
-  line-height: 0.92;
+  line-height: 1.05;
   margin: 0;
   position: relative;
   z-index: 10;
@@ -206,13 +206,13 @@
   }
 
   .projects-bounding-box {
-    padding: 1.1rem 2.2rem 0.85rem;
-    margin-top: 1.2rem;
+    padding: 1.8rem 3.4rem 2.1rem;
+    margin-top: 1.4rem;
   }
 
   .projects-script-badge {
-    top: -1.25rem;
-    left: 0.9rem;
+    top: -1.45rem;
+    left: 1.2rem;
     font-size: 2.2rem;
   }
 
@@ -230,12 +230,12 @@
 
 @media (max-width: 480px) {
   .projects-bounding-box {
-    padding: 0.95rem 1.4rem 0.75rem;
+    padding: 1.4rem 2.2rem 1.7rem;
   }
 
   .projects-script-badge {
-    top: -1.15rem;
-    left: 0.4rem;
+    top: -1.25rem;
+    left: 0.6rem;
     font-size: 1.85rem;
   }
 
