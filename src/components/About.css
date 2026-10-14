@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   background-color: #edeef0;
   background-image: url('/about-bg.png');
   background-repeat: repeat;

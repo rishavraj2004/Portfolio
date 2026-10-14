@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('Home');
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { label: 'Home', href: '#home' },
@@ -12,7 +21,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="navbar-container">
+    <header className={`navbar-container ${scrolled ? 'scrolled' : ''}`}>
       <nav className="navbar" aria-label="Main Navigation">
         <a href="#home" className="navbar-logo" onClick={() => setActiveTab('Home')}>
           Portfolio
