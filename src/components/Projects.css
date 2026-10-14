@@ -19,8 +19,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(320px, 45vw, 600px);
-  height: clamp(320px, 45vw, 600px);
+  width: clamp(340px, 46vw, 620px);
+  height: clamp(340px, 46vw, 620px);
   background: radial-gradient(circle, rgba(138, 201, 38, 0.12) 0%, rgba(138, 201, 38, 0.02) 50%, transparent 72%);
   filter: blur(50px);
   pointer-events: none;
@@ -49,21 +49,106 @@
   width: 100%;
 }
 
-/* Wrapper for overlapping script badge + title */
-.projects-title-wrapper {
+/* Dashed Bounding Box Framing "Projects" */
+.projects-bounding-box {
   position: relative;
-  display: inline-block;
-  margin: 0 auto;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px dashed rgba(220, 224, 230, 0.6);
+  padding: 1.35rem 3.6rem 1.05rem;
+  margin: 1.6rem auto 0;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* "What i build" Cursive Script Badge */
+.projects-bounding-box:hover {
+  border-color: rgba(220, 224, 230, 0.9);
+  box-shadow: 0 0 28px rgba(138, 201, 38, 0.1);
+}
+
+/* Control Handles on Bounding Box */
+.box-handle {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  background-color: #d1d5db;
+  border: 1px solid #111317;
+  box-sizing: border-box;
+  pointer-events: none;
+  z-index: 16;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.projects-bounding-box:hover .box-handle {
+  background-color: #ffffff;
+  transform: scale(1.15);
+}
+
+/* 8 Positions */
+.handle-tl {
+  top: -6px;
+  left: -6px;
+}
+
+.handle-tc {
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.projects-bounding-box:hover .handle-tc {
+  transform: translateX(-50%) scale(1.15);
+}
+
+.handle-tr {
+  top: -6px;
+  right: -6px;
+}
+
+.handle-ml {
+  top: 50%;
+  left: -6px;
+  transform: translateY(-50%);
+}
+.projects-bounding-box:hover .handle-ml {
+  transform: translateY(-50%) scale(1.15);
+}
+
+.handle-mr {
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%);
+}
+.projects-bounding-box:hover .handle-mr {
+  transform: translateY(-50%) scale(1.15);
+}
+
+.handle-bl {
+  bottom: -6px;
+  left: -6px;
+}
+
+.handle-bc {
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.projects-bounding-box:hover .handle-bc {
+  transform: translateX(-50%) scale(1.15);
+}
+
+.handle-br {
+  bottom: -6px;
+  right: -6px;
+}
+
+/* "What i build" Cursive Script Badge overlapping top dashed line */
 .projects-script-badge {
   position: absolute;
-  top: -0.34em;
-  left: -0.06em;
+  top: -1.45rem;
+  left: 1.6rem;
   font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+  font-size: clamp(2.3rem, 4.3vw, 3.8rem);
   font-weight: 400;
   color: #ffffff;
   letter-spacing: 0.02em;
@@ -73,19 +158,18 @@
   z-index: 15;
   user-select: none;
   -webkit-user-select: none;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
   pointer-events: none;
-  transition: transform 0.3s ease;
 }
 
-/* "Projects" Bold Display Title */
+/* "Projects" Main Title inside the bounding box */
 .projects-main-title {
   font-family: var(--font-display);
-  font-size: clamp(4.8rem, 12.8vw, 9.8rem);
+  font-size: clamp(4.2rem, 11.2vw, 8.8rem);
   font-weight: 900;
   color: #8ac926;
   letter-spacing: -0.035em;
-  line-height: 0.95;
+  line-height: 0.92;
   margin: 0;
   position: relative;
   z-index: 10;
@@ -108,7 +192,7 @@
   font-weight: 400;
   color: #ffffff;
   line-height: 1.48;
-  margin: 2rem auto 0;
+  margin: 2.2rem auto 0;
   text-align: center;
   max-width: 580px;
   letter-spacing: -0.015em;
@@ -121,21 +205,42 @@
     padding: 5rem 1.5rem;
   }
 
+  .projects-bounding-box {
+    padding: 1.1rem 2.2rem 0.85rem;
+    margin-top: 1.2rem;
+  }
+
   .projects-script-badge {
-    top: -0.32em;
-    left: -0.04em;
+    top: -1.25rem;
+    left: 0.9rem;
+    font-size: 2.2rem;
   }
 
   .projects-subtitle {
-    margin-top: 1.5rem;
+    margin-top: 1.8rem;
     font-size: 1.15rem;
     max-width: 420px;
+  }
+
+  .box-handle {
+    width: 9px;
+    height: 9px;
   }
 }
 
 @media (max-width: 480px) {
+  .projects-bounding-box {
+    padding: 0.95rem 1.4rem 0.75rem;
+  }
+
   .projects-script-badge {
-    top: -0.3em;
-    left: 0;
+    top: -1.15rem;
+    left: 0.4rem;
+    font-size: 1.85rem;
+  }
+
+  .box-handle {
+    width: 8px;
+    height: 8px;
   }
 }
