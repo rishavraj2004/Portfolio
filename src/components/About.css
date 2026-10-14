@@ -1,0 +1,233 @@
+.about-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #edeef0;
+  background-image: url('/about-bg.png');
+  background-repeat: repeat;
+  background-size: 160px 160px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 5.5rem 4.5rem 0;
+  box-sizing: border-box;
+  color: #1a1a1e;
+  overflow: hidden;
+}
+
+.about-container {
+  max-width: 1380px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3.5rem;
+  position: relative;
+}
+
+/* Left Column: Bio & Typography */
+.about-text-content {
+  flex: 1.15;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: center;
+  padding-top: 1.5rem;
+  padding-bottom: 5.5rem;
+  z-index: 5;
+}
+
+.about-greeting {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 6.8vw, 5.8rem);
+  font-weight: 900;
+  color: #111113;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0 0 0.2rem 0;
+}
+
+/* Subheading Row with "About Me" Annotation */
+.about-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.8rem;
+  margin: 0.2rem 0 1.2rem 0;
+  position: relative;
+}
+
+.about-name-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+  font-weight: 800;
+  color: #18191d;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* Hand-drawn "About Me" Badge & Arrow */
+.about-badge-annotation {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: -0.3rem;
+  user-select: none;
+  -webkit-user-select: none;
+  animation: doodleBounce 3.5s ease-in-out infinite;
+}
+
+.about-script-text {
+  font-family: 'Alex Brush', 'Great Vibes', cursive;
+  font-size: clamp(1.85rem, 2.6vw, 2.45rem);
+  font-weight: 400;
+  color: #141518;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.about-doodle-arrow {
+  margin-top: 0.15rem;
+  transform: rotate(-3deg);
+  opacity: 0.9;
+}
+
+/* Bio Paragraph */
+.about-bio {
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 1.22vw, 1.18rem);
+  line-height: 1.74;
+  color: #24252a;
+  font-weight: 500;
+  max-width: 640px;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Right Column: Sketch Portrait */
+.about-image-column {
+  flex: 0.95;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  align-self: flex-end;
+  position: relative;
+  z-index: 5;
+  margin-bottom: 0;
+}
+
+.about-portrait-frame {
+  width: 100%;
+  max-width: 580px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  line-height: 0;
+}
+
+.about-portrait-img {
+  width: auto;
+  height: min(88vh, 720px);
+  max-width: 100%;
+  object-fit: contain;
+  object-position: bottom right;
+  display: block;
+  vertical-align: bottom;
+  filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.08));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  pointer-events: auto;
+}
+
+.about-portrait-img:hover {
+  transform: scale(1.015) translateY(-2px);
+}
+
+/* Universal Unselectable Class */
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@keyframes doodleBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .about-section {
+    padding: 5rem 2.5rem 0;
+    min-height: auto;
+  }
+
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .about-text-content {
+    padding-bottom: 1rem;
+    align-self: flex-start;
+  }
+
+  .about-image-column {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .about-portrait-frame {
+    max-width: 440px;
+    justify-content: center;
+  }
+
+  .about-portrait-img {
+    height: min(60vh, 480px);
+    object-position: bottom center;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-section {
+    padding: 4rem 1.5rem 0;
+  }
+
+  .about-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .about-badge-annotation {
+    top: 0;
+  }
+
+  .about-portrait-frame {
+    max-width: 320px;
+  }
+
+  .about-portrait-img {
+    height: min(52vh, 380px);
+  }
+}
