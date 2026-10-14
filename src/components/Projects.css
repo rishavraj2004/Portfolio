@@ -142,19 +142,25 @@
   right: -6px;
 }
 
-/* "What i build" Cursive Script Badge overlapping top dashed line */
+/* Title wrapper locking script badge directly to "Projects" */
+.projects-title-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* "What i build" Cursive Script Badge in Sacramento font on top-left of Projects */
 .projects-script-badge {
   position: absolute;
-  top: -1.75rem;
-  left: 2.2rem;
-  font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: clamp(2.3rem, 4.3vw, 3.8rem);
+  top: -0.32em;
+  left: -0.09em;
+  font-family: 'Sacramento', cursive;
+  font-size: clamp(3rem, 6.2vw, 5.2rem);
   font-weight: 400;
   color: #ffffff;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   line-height: 1;
   white-space: nowrap;
-  transform: rotate(-3.5deg);
+  transform: none;
   z-index: 15;
   user-select: none;
   -webkit-user-select: none;
@@ -211,9 +217,9 @@
   }
 
   .projects-script-badge {
-    top: -1.45rem;
-    left: 1.2rem;
-    font-size: 2.2rem;
+    top: -0.3em;
+    left: -0.06em;
+    font-size: clamp(2.4rem, 6vw, 3.2rem);
   }
 
   .projects-subtitle {
@@ -234,9 +240,9 @@
   }
 
   .projects-script-badge {
-    top: -1.25rem;
-    left: 0.6rem;
-    font-size: 1.85rem;
+    top: -0.28em;
+    left: -0.04em;
+    font-size: clamp(2rem, 5.5vw, 2.5rem);
   }
 
   .box-handle {

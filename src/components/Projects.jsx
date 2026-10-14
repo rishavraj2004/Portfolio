@@ -21,13 +21,13 @@ export default function Projects() {
             <span className="box-handle handle-bc" aria-hidden="true"></span>
             <span className="box-handle handle-br" aria-hidden="true"></span>
 
-            {/* Script badge overlapping top dashed line and Projects */}
-            <span className="projects-script-badge" aria-hidden="true">
-              What i build
-            </span>
-
-            {/* "Projects" Main Title */}
-            <h2 className="projects-main-title">Projects</h2>
+            {/* Inner Title Wrapper to lock script badge precisely to "Projects" */}
+            <div className="projects-title-wrapper">
+              <span className="projects-script-badge" aria-hidden="true">
+                What i build
+              </span>
+              <h2 className="projects-main-title">Projects</h2>
+            </div>
           </div>
 
           {/* 2-line centered subtitle */}
