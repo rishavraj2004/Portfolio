@@ -135,9 +135,38 @@ export default function Projects() {
                   </li>
                   <li className="feature-bullet-item">
                     <span className="feature-bullet-dot" aria-hidden="true" />
-                    <span>Deployed the frontend on Netlify and backend on Render, with GitHub Actions for scheduled job automation.</span>
+                    <span>Deployed the frontend on Netlify and backend on Render, with Cron for scheduled job automation.</span>
                   </li>
                 </ul>
+              </div>
+
+              {/* Action Link / Live Demo Button */}
+              <div className="project-actions">
+                <a
+                  href="https://leetcode-guard.netlify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-cta-btn"
+                  id="leetcode-guard-cta"
+                  aria-label="Try LeetCode Guard live application (opens in new tab)"
+                >
+                  <span>Try Now</span>
+                  <svg 
+                    className="project-cta-icon" 
+                    width="15" 
+                    height="15" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2.4" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    aria-hidden="true"
+                  >
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </a>
               </div>
             </div>
 
