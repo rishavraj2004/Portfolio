@@ -123,19 +123,23 @@ export default function Projects() {
                 <ul className="project-features-list">
                   <li className="feature-bullet-item">
                     <span className="feature-bullet-dot" aria-hidden="true" />
-                    <span>Built using Node.js, Express.js, MongoDB, React, and the Telegram Bot API.</span>
+                    <span><strong>Streak Tracking:</strong> Monitors users’ LeetCode problem-solving activity to help them maintain their daily coding streaks.</span>
                   </li>
                   <li className="feature-bullet-item">
                     <span className="feature-bullet-dot" aria-hidden="true" />
-                    <span>Integrated the LeetCode GraphQL API to track users’ problem-solving progress.</span>
+                    <span><strong>Automated Reminders:</strong> Sends Telegram notifications when users haven't solved a problem, helping them avoid breaking their streaks.</span>
                   </li>
                   <li className="feature-bullet-item">
                     <span className="feature-bullet-dot" aria-hidden="true" />
-                    <span>Developed automated reminder and daily update jobs, JWT-protected admin features, and job execution logging.</span>
+                    <span><strong>LeetCode API Integration:</strong> Uses the LeetCode GraphQL API to retrieve users’ problem-solving statistics and track progress.</span>
                   </li>
                   <li className="feature-bullet-item">
                     <span className="feature-bullet-dot" aria-hidden="true" />
-                    <span>Deployed the frontend on Netlify and backend on Render, with Cron for scheduled job automation.</span>
+                    <span><strong>Admin Dashboard:</strong> Provides secure, JWT-protected admin access to manage users, trigger jobs, and monitor scheduled job execution logs.</span>
+                  </li>
+                  <li className="feature-bullet-item">
+                    <span className="feature-bullet-dot" aria-hidden="true" />
+                    <span><strong>Tech Stack & Deployment:</strong> Built using Node.js, Express.js, MongoDB, React, and the Telegram Bot API, with the frontend deployed on Netlify and the backend on Render.</span>
                   </li>
                 </ul>
               </div>
