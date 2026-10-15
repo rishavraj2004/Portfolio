@@ -1,5 +1,6 @@
 .about-section {
   position: relative;
+  z-index: 10;
   width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
@@ -14,6 +15,7 @@
   box-sizing: border-box;
   color: #1a1a1e;
   overflow: hidden;
+  box-shadow: 0 -25px 60px rgba(0, 0, 0, 0.45);
 }
 
 .about-container {
