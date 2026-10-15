@@ -4,7 +4,7 @@
   min-height: 100vh;
   min-height: 100dvh;
   background-color: #090a0d;
-  background-image: radial-gradient(circle at 50% 50%, rgba(138, 201, 38, 0.06) 0%, transparent 65%);
+  background-image: radial-gradient(circle at 50% 50%, rgba(138, 201, 38, 0.07) 0%, transparent 65%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,9 +19,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(340px, 46vw, 620px);
-  height: clamp(340px, 46vw, 620px);
-  background: radial-gradient(circle, rgba(138, 201, 38, 0.12) 0%, rgba(138, 201, 38, 0.02) 50%, transparent 72%);
+  width: clamp(340px, 48vw, 640px);
+  height: clamp(340px, 48vw, 640px);
+  background: radial-gradient(circle, rgba(138, 201, 38, 0.14) 0%, rgba(138, 201, 38, 0.02) 50%, transparent 72%);
   filter: blur(50px);
   pointer-events: none;
   z-index: 2;
@@ -49,103 +49,12 @@
   width: 100%;
 }
 
-/* Dashed Bounding Box Framing "Projects" */
-.projects-bounding-box {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px dashed rgba(220, 224, 230, 0.6);
-  padding: 2.2rem 5.2rem 2.6rem;
-  margin: 1.8rem auto 0;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.projects-bounding-box:hover {
-  border-color: rgba(220, 224, 230, 0.9);
-  box-shadow: 0 0 30px rgba(138, 201, 38, 0.12);
-}
-
-/* Control Handles on Bounding Box */
-.box-handle {
-  position: absolute;
-  width: 11px;
-  height: 11px;
-  background-color: #d1d5db;
-  border: 1px solid #111317;
-  box-sizing: border-box;
-  pointer-events: none;
-  z-index: 16;
-  transition: transform 0.25s ease, background-color 0.25s ease;
-}
-
-.projects-bounding-box:hover .box-handle {
-  background-color: #ffffff;
-  transform: scale(1.15);
-}
-
-/* 8 Positions */
-.handle-tl {
-  top: -6px;
-  left: -6px;
-}
-
-.handle-tc {
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.projects-bounding-box:hover .handle-tc {
-  transform: translateX(-50%) scale(1.15);
-}
-
-.handle-tr {
-  top: -6px;
-  right: -6px;
-}
-
-.handle-ml {
-  top: 50%;
-  left: -6px;
-  transform: translateY(-50%);
-}
-.projects-bounding-box:hover .handle-ml {
-  transform: translateY(-50%) scale(1.15);
-}
-
-.handle-mr {
-  top: 50%;
-  right: -6px;
-  transform: translateY(-50%);
-}
-.projects-bounding-box:hover .handle-mr {
-  transform: translateY(-50%) scale(1.15);
-}
-
-.handle-bl {
-  bottom: -6px;
-  left: -6px;
-}
-
-.handle-bc {
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.projects-bounding-box:hover .handle-bc {
-  transform: translateX(-50%) scale(1.15);
-}
-
-.handle-br {
-  bottom: -6px;
-  right: -6px;
-}
-
 /* Title wrapper locking script badge directly to "Projects" */
 .projects-title-wrapper {
   position: relative;
   display: inline-block;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* "What i build" Cursive Script Badge in Sacramento font on top-left of Projects */
@@ -168,19 +77,19 @@
   pointer-events: none;
 }
 
-/* "Projects" Main Title inside the bounding box */
+/* "Projects" Main Title */
 .projects-main-title {
   font-family: var(--font-display);
-  font-size: clamp(4.2rem, 11.2vw, 8.8rem);
+  font-size: clamp(4.5rem, 12vw, 9.4rem);
   font-weight: 900;
   color: #8ac926;
   letter-spacing: -0.035em;
-  line-height: 1.05;
+  line-height: 0.95;
   margin: 0;
   position: relative;
   z-index: 10;
   user-select: none;
-  text-shadow: 0 4px 30px rgba(138, 201, 38, 0.16);
+  text-shadow: 0 4px 30px rgba(138, 201, 38, 0.18);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
               text-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
@@ -188,7 +97,7 @@
 
 .projects-main-title:hover {
   transform: scale(1.02);
-  text-shadow: 0 6px 36px rgba(138, 201, 38, 0.3);
+  text-shadow: 0 6px 36px rgba(138, 201, 38, 0.32);
 }
 
 /* 2-line Subtitle */
@@ -211,11 +120,6 @@
     padding: 5rem 1.5rem;
   }
 
-  .projects-bounding-box {
-    padding: 1.8rem 3.4rem 2.1rem;
-    margin-top: 1.4rem;
-  }
-
   .projects-script-badge {
     top: -0.3em;
     left: -0.06em;
@@ -227,26 +131,12 @@
     font-size: 1.15rem;
     max-width: 420px;
   }
-
-  .box-handle {
-    width: 9px;
-    height: 9px;
-  }
 }
 
 @media (max-width: 480px) {
-  .projects-bounding-box {
-    padding: 1.4rem 2.2rem 1.7rem;
-  }
-
   .projects-script-badge {
     top: -0.28em;
     left: -0.04em;
     font-size: clamp(2rem, 5.5vw, 2.5rem);
-  }
-
-  .box-handle {
-    width: 8px;
-    height: 8px;
   }
 }
