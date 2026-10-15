@@ -184,6 +184,102 @@ export default function Projects() {
             </div>
           </div>
         </div>
+
+        {/* ==============================================================
+            SLIDE 3: PROJECT 02 - TRUST NOTE
+            ============================================================== */}
+        <div className="projects-slide projects-card-slide">
+          <div className="project-card">
+            {/* Left Column: Project Copy & Features */}
+            <div className="project-card-info">
+              {/* Brand Title with Overlapping Script */}
+              <div className="project-title-wrapper">
+                <h3 className="project-brand-title">Trust</h3>
+                <span className="project-script-accent" aria-hidden="true">Note</span>
+              </div>
+
+              {/* Taglines */}
+              <div className="project-taglines">
+                <span className="project-tag-green">Secure, Share, and Trust</span>
+                <span className="project-tag-sub">Zero-Knowledge Note Sharing</span>
+              </div>
+
+              {/* Bio / Description */}
+              <p className="project-description">
+                Trust Note is a secure note-sharing platform that allows users to share sensitive text, credentials, and configuration snippets through password-protected note IDs or secret links without requiring recipients to sign up. It also enables registered users to store encrypted notes and .env text in their personal accounts, making it easier to share and manage sensitive information securely.
+              </p>
+
+              {/* Key Features Block with Bullet Points */}
+              <div className="project-features-block">
+                <h4 className="project-features-title">Key Features</h4>
+                <ul className="project-features-list">
+                  <li className="feature-bullet-item">
+                    <span className="feature-bullet-dot" aria-hidden="true" />
+                    <span><strong>Secure Note Sharing:</strong> Allows users to create and share sensitive text through unique Note IDs and passwords without requiring registration.</span>
+                  </li>
+                  <li className="feature-bullet-item">
+                    <span className="feature-bullet-dot" aria-hidden="true" />
+                    <span><strong>Password Protection:</strong> Uses SHA-256 hashing to protect note passwords instead of storing them as plain text.</span>
+                  </li>
+                  <li className="feature-bullet-item">
+                    <span className="feature-bullet-dot" aria-hidden="true" />
+                    <span><strong>Easy Retrieval:</strong> Enables recipients to retrieve and view shared notes through a dedicated interface.</span>
+                  </li>
+                  <li className="feature-bullet-item">
+                    <span className="feature-bullet-dot" aria-hidden="true" />
+                    <span><strong>User-Friendly Interface:</strong> Features a responsive design, copy-to-clipboard functionality, and client-side input validation.</span>
+                  </li>
+                  <li className="feature-bullet-item">
+                    <span className="feature-bullet-dot" aria-hidden="true" />
+                    <span><strong>Tech Stack & Deployment:</strong> Built using web technologies and Firebase Firestore for data storage, with the frontend deployed on Netlify.</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Action Link / Live Demo Button */}
+              <div className="project-actions">
+                <a
+                  href="https://trust-note.netlify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-cta-btn"
+                  id="trust-note-cta"
+                  aria-label="Try Trust Note live application (opens in new tab)"
+                >
+                  <span>Try Now</span>
+                  <svg 
+                    className="project-cta-icon" 
+                    width="15" 
+                    height="15" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2.4" 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    aria-hidden="true"
+                  >
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Column: High-Res Laptop Showcase on Wooden Stand */}
+            <div className="project-card-media">
+              <div className="project-mockup-frame">
+                <img 
+                  src="/project-trustnote.png" 
+                  alt="Trust Note application running on laptop device" 
+                  className="project-mockup-img"
+                  loading="lazy"
+                  draggable="false"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

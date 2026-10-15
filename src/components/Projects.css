@@ -16,7 +16,7 @@
 .projects-horizontal-track {
   display: flex;
   flex-wrap: nowrap;
-  width: 200vw;
+  width: max-content;
   height: 100%;
   position: relative;
   will-change: transform;
@@ -312,6 +312,11 @@
   line-height: 1.48;
   color: #222328;
   font-weight: 500;
+}
+
+.feature-bullet-item strong {
+  font-weight: 700;
+  color: #111215;
 }
 
 .feature-bullet-dot {
