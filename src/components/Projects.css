@@ -1,20 +1,51 @@
+/* ==============================================================
+   PROJECTS SECTION: HORIZONTAL GSAP SCROLL (RIGHT TO LEFT)
+   ============================================================== */
+
 .projects-section {
   position: relative;
-  z-index: 10;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   background-color: #090a0d;
-  background-image: radial-gradient(circle at 50% 50%, rgba(138, 201, 38, 0.07) 0%, transparent 65%);
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Horizontal Track spanning across slides */
+.projects-horizontal-track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 200vw;
+  height: 100%;
+  position: relative;
+  will-change: transform;
+}
+
+/* Each Slide occupies 100vw x 100vh */
+.projects-slide {
+  width: 100vw;
+  min-width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6rem 2rem;
+  position: relative;
   box-sizing: border-box;
+  flex-shrink: 0;
   overflow: hidden;
 }
 
-/* Subtle ambient radial glow behind header */
+/* ==============================================================
+   SLIDE 1: INTRO PANEL
+   ============================================================== */
+.projects-intro-slide {
+  background-color: #090a0d;
+  background-image: radial-gradient(circle at 50% 50%, rgba(138, 201, 38, 0.07) 0%, transparent 65%);
+  padding: 6rem 2rem;
+}
+
 .projects-glow {
   position: absolute;
   top: 50%;
@@ -28,11 +59,7 @@
   z-index: 2;
 }
 
-/* Centered Container */
-.projects-container {
-  max-width: 1100px;
-  width: 100%;
-  margin: 0 auto;
+.projects-intro-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,15 +69,6 @@
   z-index: 10;
 }
 
-.projects-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-/* Title wrapper locking script badge directly to "Projects" */
 .projects-title-wrapper {
   position: relative;
   display: inline-block;
@@ -58,7 +76,6 @@
   text-align: center;
 }
 
-/* "What i build" Cursive Script Badge in Sacramento font on top-left of Projects */
 .projects-script-badge {
   position: absolute;
   top: -0.32em;
@@ -78,7 +95,6 @@
   pointer-events: none;
 }
 
-/* "Projects" Main Title */
 .projects-main-title {
   font-family: var(--font-display);
   font-size: clamp(4.5rem, 12vw, 9.4rem);
@@ -101,7 +117,6 @@
   text-shadow: 0 6px 36px rgba(138, 201, 38, 0.32);
 }
 
-/* 2-line Subtitle */
 .projects-subtitle {
   font-family: var(--font-sans);
   font-size: clamp(1.15rem, 2.1vw, 1.65rem);
@@ -115,29 +130,317 @@
   opacity: 0.96;
 }
 
-/* Responsive tweaks */
-@media (max-width: 768px) {
-  .projects-section {
-    padding: 5rem 1.5rem;
-  }
+/* Subtle Animated Scroll Hint */
+.projects-scroll-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 3.5rem;
+  color: #8ac926;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 99px;
+  background: rgba(138, 201, 38, 0.08);
+  border: 1px solid rgba(138, 201, 38, 0.22);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
 
-  .projects-script-badge {
-    top: -0.3em;
-    left: -0.06em;
-    font-size: clamp(2.4rem, 6vw, 3.2rem);
-  }
+.projects-scroll-hint:hover {
+  background: rgba(138, 201, 38, 0.16);
+  border-color: rgba(138, 201, 38, 0.45);
+  transform: translateX(4px);
+}
 
-  .projects-subtitle {
-    margin-top: 1.8rem;
-    font-size: 1.15rem;
-    max-width: 420px;
+.scroll-hint-arrow {
+  transition: transform 0.25s ease;
+  animation: arrowPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
   }
 }
 
-@media (max-width: 480px) {
-  .projects-script-badge {
-    top: -0.28em;
-    left: -0.04em;
-    font-size: clamp(2rem, 5.5vw, 2.5rem);
+/* ==============================================================
+   SLIDE 2: PROJECT CARD SHOWCASE (LEETCODE GUARD)
+   ============================================================== */
+.projects-card-slide {
+  padding: 2.2rem 3.5rem;
+  box-sizing: border-box;
+}
+
+.project-card {
+  width: 100%;
+  max-width: 1320px;
+  height: min(88vh, 690px);
+  background-color: #edeef0;
+  background-image: url('/about-bg.png');
+  background-repeat: repeat;
+  background-size: 160px 160px;
+  border-radius: 30px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.65), 0 4px 20px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  padding: 3rem 2.8rem 0 3.8rem;
+  gap: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Left Column: Project Content */
+.project-card-info {
+  flex: 1.15;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-bottom: 2.8rem;
+  z-index: 5;
+}
+
+/* Brand Title Row */
+.project-title-wrapper {
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.project-brand-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 4.4vw, 4.1rem);
+  font-weight: 900;
+  color: #111113;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  margin: 0;
+}
+
+.project-script-accent {
+  font-family: 'Sacramento', 'Alex Brush', cursive;
+  font-size: clamp(2.8rem, 4.5vw, 4rem);
+  font-weight: 400;
+  color: #6a994e;
+  margin-left: 0.18em;
+  line-height: 1;
+  position: relative;
+  top: -0.1em;
+  white-space: nowrap;
+}
+
+/* Taglines */
+.project-taglines {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.85rem;
+}
+
+.project-tag-green {
+  font-family: var(--font-display);
+  font-size: clamp(1.22rem, 1.8vw, 1.5rem);
+  font-weight: 800;
+  color: #6a994e;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.project-tag-sub {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  font-weight: 700;
+  color: #18191d;
+  letter-spacing: -0.015em;
+  margin-top: 0.15rem;
+}
+
+/* Description paragraph */
+.project-description {
+  font-family: var(--font-sans);
+  font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+  line-height: 1.62;
+  color: #282a30;
+  font-weight: 500;
+  max-width: 580px;
+  margin: 0 0 1.05rem 0;
+  letter-spacing: -0.01em;
+}
+
+/* Features Block */
+.project-features-block {
+  width: 100%;
+  max-width: 580px;
+}
+
+.project-features-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.4vw, 1.3rem);
+  font-weight: 800;
+  color: #6a994e;
+  margin: 0 0 0.55rem 0;
+  letter-spacing: -0.02em;
+}
+
+.project-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.feature-bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 0.98vw, 0.94rem);
+  line-height: 1.48;
+  color: #222328;
+  font-weight: 500;
+}
+
+.feature-bullet-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #6a994e;
+  margin-top: 0.45rem;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(106, 153, 78, 0.5);
+}
+
+/* Right Column: Mockup Media */
+.project-card-media {
+  flex: 1.15;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  position: relative;
+  height: 100%;
+}
+
+.project-mockup-frame {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  line-height: 0;
+}
+
+.project-mockup-img {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  max-height: 590px;
+  object-fit: contain;
+  object-position: bottom right;
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.16));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-card:hover .project-mockup-img {
+  transform: scale(1.02) translateY(-4px);
+}
+
+/* ==============================================================
+   RESPONSIVE DESIGN
+   ============================================================== */
+@media (max-width: 1100px) {
+  .project-card {
+    padding: 2.5rem 2rem 0 2.5rem;
+    gap: 1.5rem;
+  }
+
+  .project-mockup-img {
+    max-height: 480px;
+  }
+}
+
+@media (max-width: 992px) {
+  .projects-section {
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .projects-horizontal-track {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .projects-slide {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 4.5rem 1.5rem;
+  }
+
+  .project-card {
+    flex-direction: column;
+    height: auto;
+    padding: 3rem 2rem 0;
+    max-width: 680px;
+  }
+
+  .project-card-info {
+    padding-bottom: 1.5rem;
+  }
+
+  .project-card-media {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .project-mockup-img {
+    max-height: 380px;
+    object-position: bottom center;
+  }
+}
+
+@media (max-width: 640px) {
+  .projects-intro-slide {
+    padding: 4rem 1.25rem;
+  }
+
+  .project-card {
+    border-radius: 22px;
+    padding: 2.2rem 1.4rem 0;
+  }
+
+  .project-brand-title {
+    font-size: 2.4rem;
+  }
+
+  .project-script-accent {
+    font-size: 2.4rem;
+  }
+
+  .project-tag-green {
+    font-size: 1.15rem;
+  }
+
+  .project-mockup-img {
+    max-height: 290px;
   }
 }
