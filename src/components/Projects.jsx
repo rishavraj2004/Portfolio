@@ -16,27 +16,79 @@ export default function Projects() {
 
       const mm = gsap.matchMedia();
 
-      // Desktop & Tablets (>= 992px): Pinned right-to-left scrub
+      // Desktop & Tablets (>= 992px): Horizontal freeze-and-stack scroll
       mm.add('(min-width: 992px)', () => {
         const slides = gsap.utils.toArray('.projects-slide');
         const totalSlides = slides.length;
 
-        gsap.to(slides, {
-          xPercent: -100 * (totalSlides - 1),
-          ease: 'none',
+        // Position slides absolutely on desktop with ascending z-index
+        slides.forEach((slide, i) => {
+          gsap.set(slide, {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            xPercent: i === 0 ? 0 : 100,
+            zIndex: i + 1,
+            transformOrigin: 'left center',
+            willChange: 'transform, filter',
+          });
+        });
+
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
             pin: true,
             scrub: 1,
+            start: 'top top',
+            end: () => `+=${window.innerWidth * (totalSlides - 1) * 1.35}`,
             snap: {
               snapTo: 1 / (totalSlides - 1),
               duration: { min: 0.25, max: 0.5 },
               ease: 'power1.inOut',
             },
-            end: () => `+=${window.innerWidth * (totalSlides - 1) * 1.15}`,
             invalidateOnRefresh: true,
           },
         });
+
+        for (let i = 1; i < totalSlides; i++) {
+          const prevSlide = slides[i - 1];
+          const currSlide = slides[i];
+          const startTime = i - 1;
+
+          if (i === 1) {
+            // Slide 0 (Intro) transitions out to the left while Slide 1 (Project 1) enters
+            tl.to(prevSlide, {
+              xPercent: -100,
+              ease: 'none',
+              duration: 1,
+            }, startTime);
+
+            tl.to(currSlide, {
+              xPercent: 0,
+              ease: 'none',
+              duration: 1,
+            }, startTime);
+          } else {
+            // Second or subsequent project:
+            // Freeze previous project in place and scale down / dim slightly for stacking card effect
+            tl.to(prevSlide, {
+              scale: 0.94,
+              x: '-3.5vw',
+              filter: 'brightness(0.72)',
+              ease: 'none',
+              duration: 1,
+            }, startTime);
+
+            // Next project scrolls directly ON TOP of the frozen project
+            tl.to(currSlide, {
+              xPercent: 0,
+              ease: 'none',
+              duration: 1,
+            }, startTime);
+          }
+        }
       });
     }, sectionRef);
 
