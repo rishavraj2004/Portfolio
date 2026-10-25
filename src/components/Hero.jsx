@@ -457,10 +457,17 @@ export default function Hero() {
 
           {/* Interactive Chibi Mascot rendered after all animations */}
           <div className={`hero-mascot-wrapper ${allDone ? 'visible' : ''}`}>
+            {/* Speech bubble on the right top */}
+            <div className="mascot-speech-bubble" aria-hidden="true">
+              <span className="bubble-text">Hey, you!</span>
+              <span className="bubble-heart">❤️</span>
+            </div>
+
             <Mascot
               directions="/mascots/risha-chibi-directions.webp"
               reactions="/mascots/risha-chibi-reactions.webp"
               label="Chibi portrait mascot"
+              size={230}
             />
           </div>
         </div>

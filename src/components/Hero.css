@@ -32,7 +32,7 @@
 }
 
 .hero-content-wrapper.shifted {
-  transform: translateX(-55px);
+  transform: translateX(-75px);
 }
 
 /* Flex row holding the Name Block and the Mascot */
@@ -45,9 +45,9 @@
 /* Interactive Mascot Wrapper */
 .hero-mascot-wrapper {
   position: absolute;
-  left: calc(100% + clamp(1.2rem, 2.5vw, 2.8rem));
+  left: calc(100% + clamp(1.4rem, 3vw, 3.2rem));
   top: 50%;
-  transform: translateY(-50%) scale(0.8);
+  transform: translateY(-50%) scale(0.85);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -61,6 +61,77 @@
   opacity: 1;
   transform: translateY(-50%) scale(1);
   pointer-events: auto;
+}
+
+/* Speech bubble on top right of the Mascot */
+.mascot-speech-bubble {
+  position: absolute;
+  top: -16px;
+  right: -24px;
+  background: #ffffff;
+  color: #1a1b22;
+  font-family: var(--font-sans);
+  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 0.5rem 1.05rem;
+  border-radius: 20px 20px 20px 4px;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 30;
+  animation: bubbleFloat 3s ease-in-out infinite alternate;
+}
+
+/* Speech bubble tail pointing towards the mascot */
+.mascot-speech-bubble::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  bottom: -6px;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  transform: rotate(45deg);
+  border-bottom-right-radius: 3px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bubble-text {
+  position: relative;
+  z-index: 2;
+  color: #1a1b22;
+}
+
+.bubble-heart {
+  position: relative;
+  z-index: 2;
+  font-size: 1.05em;
+  display: inline-block;
+  animation: heartThrob 1.8s ease-in-out infinite;
+}
+
+@keyframes bubbleFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes heartThrob {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.18);
+  }
 }
 
 /* Main Name Block */
