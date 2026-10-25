@@ -16,7 +16,7 @@ export default function Projects() {
 
       const mm = gsap.matchMedia();
 
-      // Desktop & Tablets (>= 992px): Horizontal freeze-and-stack scroll
+      // Desktop & Tablets (>= 992px): Horizontal complete overlay scroll
       mm.add('(min-width: 992px)', () => {
         const slides = gsap.utils.toArray('.projects-slide');
         const totalSlides = slides.length;
@@ -30,9 +30,10 @@ export default function Projects() {
             width: '100%',
             height: '100%',
             xPercent: i === 0 ? 0 : 100,
+            x: 0,
+            scale: 1,
             zIndex: i + 1,
-            transformOrigin: 'left center',
-            willChange: 'transform, filter',
+            willChange: 'transform',
           });
         });
 
@@ -40,13 +41,13 @@ export default function Projects() {
           scrollTrigger: {
             trigger: sectionRef.current,
             pin: true,
-            scrub: 1,
+            scrub: 0.8,
             start: 'top top',
-            end: () => `+=${window.innerWidth * (totalSlides - 1) * 1.35}`,
+            end: () => `+=${window.innerHeight * (totalSlides - 1) * 1.35}`,
             snap: {
               snapTo: 1 / (totalSlides - 1),
-              duration: { min: 0.25, max: 0.5 },
-              ease: 'power1.inOut',
+              duration: { min: 0.2, max: 0.4 },
+              ease: 'power1.out',
             },
             invalidateOnRefresh: true,
           },
@@ -58,12 +59,13 @@ export default function Projects() {
           const startTime = i - 1;
 
           if (i === 1) {
-            // Slide 0 (Intro) transitions out to the left while Slide 1 (Project 1) enters
+            // Slide 0 (Intro) -> Slide 1 (Project 1: LeetCode Guard)
+            // Slide 0 stays visible and gently fades as Slide 1 slides in over it to eliminate any blackout gap
             tl.to(prevSlide, {
-              xPercent: -100,
-              ease: 'none',
-              duration: 1,
-            }, startTime);
+              opacity: 0,
+              ease: 'power1.in',
+              duration: 0.85,
+            }, startTime + 0.15);
 
             tl.to(currSlide, {
               xPercent: 0,
@@ -71,17 +73,9 @@ export default function Projects() {
               duration: 1,
             }, startTime);
           } else {
-            // Second or subsequent project:
-            // Freeze previous project in place and scale down / dim slightly for stacking card effect
-            tl.to(prevSlide, {
-              scale: 0.94,
-              x: '-3.5vw',
-              filter: 'brightness(0.72)',
-              ease: 'none',
-              duration: 1,
-            }, startTime);
-
-            // Next project scrolls directly ON TOP of the frozen project
+            // Second and subsequent projects:
+            // Complete overlay! Previous project stays frozen at (0, 0), scale 1.
+            // Next project slides in from right and completely overlays it with identical alignment.
             tl.to(currSlide, {
               xPercent: 0,
               ease: 'none',
