@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Mascot } from 'page-mascot';
 import './Hero.css';
 
 /* ───────────── Physics & Timing Configuration ───────────── */
@@ -353,103 +354,114 @@ export default function Hero() {
         '--mouse-y': `${mousePos.y}%`,
       }}
     >
-      <div className="hero-content-wrapper">
-        {/* Big Name Typography with Physics Reveal Animation */}
-        <div className="hero-name-container">
-          <h1 
-            className={`hero-first-name${ready ? ' ready' : ''}${allDone ? ' all-done' : ''}`} 
-            aria-label="Rishav"
-          >
-            {/* Wiping mask for 'R' */}
-            <span 
-              ref={left} 
-              className="hero-wipe hero-wipe-left" 
-              style={{ marginRight: `${KERN.R}em` }} 
-              aria-hidden="true"
+      <div className={`hero-content-wrapper ${allDone ? 'shifted' : ''}`}>
+        <div className="hero-main-row">
+          {/* Big Name Typography with Physics Reveal Animation */}
+          <div className="hero-name-container">
+            <h1 
+              className={`hero-first-name${ready ? ' ready' : ''}${allDone ? ' all-done' : ''}`} 
+              aria-label="Rishav"
             >
-              <span className="letter letter-r">R</span>
-            </span>
-
-            {/* Rotating Slot for 'i' */}
-            <span 
-              ref={slot} 
-              className={`hero-slot ${isIHovered ? 'i-hovered' : ''}`} 
-              style={{ marginRight: `${KERN.i}em` }}
-              aria-hidden="true"
-              onMouseEnter={() => allDone && setIsIHovered(true)}
-              onMouseLeave={() => allDone && setIsIHovered(false)}
-            >
-              {/* Stem of the letter 'i' (revealed after dot bounces) */}
-              <span ref={glyph} className="hero-glyph">
-                <span className="letter-i-stem">ı</span>
+              {/* Wiping mask for 'R' */}
+              <span 
+                ref={left} 
+                className="hero-wipe hero-wipe-left" 
+                style={{ marginRight: `${KERN.R}em` }} 
+                aria-hidden="true"
+              >
+                <span className="letter letter-r">R</span>
               </span>
 
-              {/* Baseline alignment probe */}
-              <i ref={base} className="hero-base" />
-
-              {/* Dot of the letter 'i' (lights turned off) */}
-              <span ref={dot} className="hero-dot" />
-
-              {/* Impact shockwave ripples on the floor */}
-              {ripples.map((p, n) => (
-                <span key={n} className="hero-ripple" style={{ '--p': p }} />
-              ))}
-            </span>
-
-            {/* Wiping mask for 'shav' */}
-            <span 
-              ref={right} 
-              className="hero-wipe hero-wipe-right" 
-              aria-hidden="true"
-            >
-              <span className="letter letter-s">s</span>
-              <span className="letter letter-h">h</span>
-              <span className="letter letter-a">a</span>
-              <span className="letter letter-v">v</span>
-            </span>
-          </h1>
-
-          {/* Overlapping cursive script: "Raj" — written smoothly after Rishav reveal */}
-          <div 
-            className={`hero-last-name-script ${rishavDone ? 'visible' : ''} ${rajDone ? 'written' : ''}`}
-            aria-label="Raj"
-          >
-            <svg 
-              className="raj-svg" 
-              viewBox="0 0 260 140" 
-              aria-hidden="true"
-            >
-              <defs>
-                <mask id="raj-mask">
-                  <path 
-                    ref={rajPath}
-                    d="M 28,45 C 24,65 24,95 30,118 M 26,55 C 38,32 74,28 90,44 C 102,56 98,74 82,82 C 68,88 50,88 38,86 M 60,84 C 74,92 90,108 104,120 M 106,105 C 118,88 136,84 148,92 C 158,100 154,118 138,120 C 124,122 116,108 128,94 C 138,84 152,90 152,118 M 156,100 C 168,86 182,88 184,100 C 186,118 178,140 160,146 C 146,152 142,138 156,124 C 168,112 182,100 194,92 M 184,65 L 184,66"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="42"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </mask>
-              </defs>
-              <text 
-                x="20" 
-                y="112" 
-                className="raj-svg-text" 
-                mask={rajDone ? undefined : "url(#raj-mask)"}
-              >
-                Raj
-              </text>
-            </svg>
-
-            {/* Glowing handwriting pen tip during the cursive writing animation */}
-            {penPos && !rajDone && (
+              {/* Rotating Slot for 'i' */}
               <span 
-                className="raj-pen-glow" 
-                style={{ left: `${penPos.x}%`, top: `${penPos.y}%` }} 
+                ref={slot} 
+                className={`hero-slot ${isIHovered ? 'i-hovered' : ''}`} 
+                style={{ marginRight: `${KERN.i}em` }}
                 aria-hidden="true"
-              />
-            )}
+                onMouseEnter={() => allDone && setIsIHovered(true)}
+                onMouseLeave={() => allDone && setIsIHovered(false)}
+              >
+                {/* Stem of the letter 'i' (revealed after dot bounces) */}
+                <span ref={glyph} className="hero-glyph">
+                  <span className="letter-i-stem">ı</span>
+                </span>
+
+                {/* Baseline alignment probe */}
+                <i ref={base} className="hero-base" />
+
+                {/* Dot of the letter 'i' (lights turned off) */}
+                <span ref={dot} className="hero-dot" />
+
+                {/* Impact shockwave ripples on the floor */}
+                {ripples.map((p, n) => (
+                  <span key={n} className="hero-ripple" style={{ '--p': p }} />
+                ))}
+              </span>
+
+              {/* Wiping mask for 'shav' */}
+              <span 
+                ref={right} 
+                className="hero-wipe hero-wipe-right" 
+                aria-hidden="true"
+              >
+                <span className="letter letter-s">s</span>
+                <span className="letter letter-h">h</span>
+                <span className="letter letter-a">a</span>
+                <span className="letter letter-v">v</span>
+              </span>
+            </h1>
+
+            {/* Overlapping cursive script: "Raj" — written smoothly after Rishav reveal */}
+            <div 
+              className={`hero-last-name-script ${rishavDone ? 'visible' : ''} ${rajDone ? 'written' : ''}`}
+              aria-label="Raj"
+            >
+              <svg 
+                className="raj-svg" 
+                viewBox="0 0 260 140" 
+                aria-hidden="true"
+              >
+                <defs>
+                  <mask id="raj-mask">
+                    <path 
+                      ref={rajPath}
+                      d="M 28,45 C 24,65 24,95 30,118 M 26,55 C 38,32 74,28 90,44 C 102,56 98,74 82,82 C 68,88 50,88 38,86 M 60,84 C 74,92 90,108 104,120 M 106,105 C 118,88 136,84 148,92 C 158,100 154,118 138,120 C 124,122 116,108 128,94 C 138,84 152,90 152,118 M 156,100 C 168,86 182,88 184,100 C 186,118 178,140 160,146 C 146,152 142,138 156,124 C 168,112 182,100 194,92 M 184,65 L 184,66"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="42"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </mask>
+                </defs>
+                <text 
+                  x="20" 
+                  y="112" 
+                  className="raj-svg-text" 
+                  mask={rajDone ? undefined : "url(#raj-mask)"}
+                >
+                  Raj
+                </text>
+              </svg>
+
+              {/* Glowing handwriting pen tip during the cursive writing animation */}
+              {penPos && !rajDone && (
+                <span 
+                  className="raj-pen-glow" 
+                  style={{ left: `${penPos.x}%`, top: `${penPos.y}%` }} 
+                  aria-hidden="true"
+                />
+              )}
+            </div>
+          </div>
+
+          {/* Interactive Chibi Mascot rendered after all animations */}
+          <div className={`hero-mascot-wrapper ${allDone ? 'visible' : ''}`}>
+            <Mascot
+              directions="/mascots/risha-chibi-directions.webp"
+              reactions="/mascots/risha-chibi-reactions.webp"
+              label="Chibi portrait mascot"
+            />
           </div>
         </div>
 

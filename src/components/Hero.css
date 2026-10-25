@@ -17,6 +17,7 @@
 }
 
 /* Centered content wrapper */
+/* Centered content wrapper — smoothly shifts slightly left after all animations */
 .hero-content-wrapper {
   position: relative;
   z-index: 10;
@@ -26,6 +27,40 @@
   margin: 0 auto;
   width: fit-content;
   animation: heroFadeIn 0.8s ease-out forwards;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.hero-content-wrapper.shifted {
+  transform: translateX(-55px);
+}
+
+/* Flex row holding the Name Block and the Mascot */
+.hero-main-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Interactive Mascot Wrapper */
+.hero-mascot-wrapper {
+  position: absolute;
+  left: calc(100% + clamp(1.2rem, 2.5vw, 2.8rem));
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 25;
+}
+
+.hero-mascot-wrapper.visible {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+  pointer-events: auto;
 }
 
 /* Main Name Block */
@@ -417,11 +452,37 @@
   .hero-section {
     padding: 0 2rem;
   }
+
+  .hero-content-wrapper.shifted {
+    transform: translateX(-35px);
+  }
+
+  .hero-mascot-wrapper {
+    left: calc(100% + 1rem);
+    transform: translateY(-50%) scale(0.85);
+  }
+
+  .hero-mascot-wrapper.visible {
+    transform: translateY(-50%) scale(0.85);
+  }
 }
 
 @media (max-width: 640px) {
   .hero-section {
     padding: 0 1.25rem;
+  }
+
+  .hero-content-wrapper.shifted {
+    transform: translateX(-15px);
+  }
+
+  .hero-mascot-wrapper {
+    left: calc(100% + 0.35rem);
+    transform: translateY(-50%) scale(0.68);
+  }
+
+  .hero-mascot-wrapper.visible {
+    transform: translateY(-50%) scale(0.68);
   }
 
   .hero-last-name-script {
