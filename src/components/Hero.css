@@ -76,10 +76,19 @@
   height: 2.2em;
   pointer-events: none;
   z-index: 1;
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Soft incandescent light glow on the subtle black background - gentle & unobtrusive */
+.hero-bulb-backdrop.backdrop-hidden {
+  opacity: 0 !important;
+}
+
+.hero-bulb-backdrop.glow-off {
+  opacity: 0 !important;
+}
+
+/* Soft incandescent light glow on the subtle black background */
 .spotlight-glow {
   position: absolute;
   inset: 0;
@@ -94,7 +103,7 @@
   animation: ambientBreathe 4s ease-in-out infinite alternate;
 }
 
-/* Noisy texture revealed gently by the light - subtle whisper grain */
+/* Noisy texture revealed gently by the light */
 .spotlight-noise {
   position: absolute;
   inset: 0;
@@ -135,6 +144,66 @@
   position: relative;
   z-index: 5;
   cursor: default;
+  visibility: hidden; /* Hidden until font metrics are computed */
+}
+
+.hero-first-name.ready {
+  visibility: visible;
+}
+
+.hero-first-name.all-done {
+  animation: heroSettle 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ==============================================================
+   PHYSICS REVEAL WIPES FOR 'R' AND 'shav'
+   ============================================================== */
+.hero-wipe {
+  --c: 100;
+  display: inline-flex;
+  align-items: baseline;
+  -webkit-mask-image: linear-gradient(var(--dir), transparent calc(var(--c) * 1%), #000 calc(var(--c) * 1% + 12%));
+  mask-image: linear-gradient(var(--dir), transparent calc(var(--c) * 1%), #000 calc(var(--c) * 1% + 12%));
+}
+
+.hero-wipe-left {
+  --dir: to right; /* revealed right → left as the 'i' tips left */
+}
+
+.hero-wipe-right {
+  --dir: to left; /* revealed left → right as the 'i' sweeps right */
+}
+
+.hero-first-name.all-done .hero-wipe {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+/* ==============================================================
+   ROTATING SLOT FOR 'i' (STEM + GLOWING BULB DOT)
+   ============================================================== */
+.hero-slot {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  transform-origin: calc(var(--x, 0px) + var(--d, 0px) / 2) var(--floor, 100%); /* Pivot: stem base on floor */
+  will-change: transform;
+  z-index: 8;
+  cursor: pointer;
+}
+
+.hero-base {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: baseline;
+}
+
+.hero-glyph {
+  display: inline-flex;
+  align-items: baseline;
+  will-change: transform, opacity;
+  transform-origin: bottom center;
 }
 
 /* Individual letter directional shading matching reference illumination */
@@ -153,13 +222,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Letter 'i' - container for the stem and the radiant glowing bulb */
-.letter-i {
-  position: relative;
-  display: inline-block;
-  z-index: 6;
-}
-
+/* Stem of 'i' */
 .letter-i-stem {
   display: inline-block;
   background: linear-gradient(180deg, #ffffff 0%, #eaf0f7 50%, #d0d7e2 100%);
@@ -168,57 +231,6 @@
   line-height: 1;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   -webkit-text-stroke: 0px transparent;
-}
-
-/* ==============================================================
-   GLOWING BULB / ORB DOT THAT LIGHTS UP THE SURROUNDINGS
-   ============================================================== */
-
-/* Radiant bloom - very soft & subtle so it doesn't steal attention */
-.bulb-bloom {
-  position: absolute;
-  top: 0.12em;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0.65em;
-  height: 0.65em;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0.08) 35%,
-    transparent 75%
-  );
-  pointer-events: none;
-  z-index: 10;
-  filter: blur(3px);
-  animation: bloomPulse 2.5s ease-in-out infinite alternate;
-  transition: opacity 0.3s ease;
-}
-
-/* The actual glowing bulb/sphere orb - gentle pearl dot */
-.bulb-orb {
-  position: absolute;
-  top: 0.12em;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0.32em;
-  height: 0.32em;
-  border-radius: 50%;
-  box-sizing: border-box;
-  background: radial-gradient(
-    circle at 35% 32%,
-    #ffffff 0%,
-    #e8edf5 60%,
-    #cfd5e2 100%
-  );
-  box-shadow:
-    0 0 4px 1px rgba(255, 255, 255, 0.4),
-    0 0 10px 2px rgba(255, 255, 255, 0.15);
-  border: 1.8px solid transparent;
-  z-index: 12;
-  pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Letter 's' - lit smoothly on left side facing the glowing bulb */
@@ -250,14 +262,114 @@
 }
 
 /* ==============================================================
-   HOVER EFFECT ON EACH INDIVIDUAL LETTER OF "RISHAV":
-   - Hovering any letter blanks its fill and displays an outline.
-   - Hovering 'i' outlines both the stem and the circular dot of 'i'
-     as an unfilled outline, while turning OFF the glow & spotlight.
+   GLOWING BULB / ORB DOT THAT LIGHTS UP THE SURROUNDINGS
    ============================================================== */
-.letter:not(.letter-i):hover,
-.letter-i:hover .letter-i-stem,
-.letter-i.i-hovered .letter-i-stem {
+
+/* The bouncing / glowing bulb dot */
+.hero-dot {
+  --trail: 0px;
+  position: absolute;
+  left: var(--x, 0px);
+  top: var(--y, 0px);
+  width: var(--d, 35px);
+  height: var(--d, 35px);
+  border-radius: 50%;
+  box-sizing: border-box;
+  background: radial-gradient(
+    circle at 35% 32%,
+    #ffffff 0%,
+    #e8edf5 60%,
+    #cfd5e2 100%
+  );
+  box-shadow:
+    0 0 calc(var(--d, 35px) * 0.45) rgba(255, 255, 255, 0.65),
+    0 0 calc(var(--d, 35px) * 1.1) rgba(255, 255, 255, 0.22);
+  border: 1.8px solid transparent;
+  opacity: 0;
+  transform-origin: 50% 100%;
+  will-change: transform;
+  pointer-events: none;
+  z-index: 12;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-dot.live {
+  opacity: 1;
+}
+
+/* Motion trail behind dot while falling with gravity */
+.hero-dot::before {
+  content: "";
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 50%;
+  height: var(--trail, 0px);
+  border-radius: 999px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.55), transparent);
+  pointer-events: none;
+}
+
+/* Radiant bloom around the bulb */
+.bulb-bloom {
+  position: absolute;
+  left: calc(var(--x, 0px) + var(--d, 35px) / 2);
+  top: calc(var(--y, 0px) + var(--d, 35px) / 2);
+  transform: translate(-50%, -50%);
+  width: calc(var(--d, 35px) * 2.2);
+  height: calc(var(--d, 35px) * 2.2);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 10;
+  filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.bulb-bloom.bloom-active {
+  opacity: 1;
+  animation: bloomPulse 2.5s ease-in-out infinite alternate;
+}
+
+/* Impact shockwave ripple emitted on each baseline bounce */
+.hero-ripple {
+  position: absolute;
+  left: var(--x, 0px);
+  top: var(--floor, 100%);
+  width: var(--d, 35px);
+  height: var(--d, 35px);
+  margin-top: calc(-0.5 * var(--d, 35px));
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: heroRippleAnim 0.75s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes heroRippleAnim {
+  0% {
+    transform: scale(0.6, 0.22);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(calc(2 + 3.5 * var(--p, 1)), 0.45);
+    opacity: 0;
+  }
+}
+
+/* ==============================================================
+   HOVER EFFECTS AFTER ANIMATION COMPLETION
+   ============================================================== */
+.hero-first-name.all-done .letter:hover,
+.hero-first-name.all-done .hero-slot:hover .letter-i-stem,
+.hero-first-name.all-done .hero-slot.i-hovered .letter-i-stem {
   background: transparent !important;
   -webkit-background-clip: unset !important;
   background-clip: unset !important;
@@ -266,50 +378,100 @@
   -webkit-text-stroke: 1.8px #ffffff;
 }
 
-/* On hovering 'i': turn off the glowing bloom */
-.letter-i:hover .bulb-bloom,
-.letter-i.i-hovered .bulb-bloom {
+/* Hovering 'i': turn off the glowing bloom */
+.hero-first-name.all-done .hero-slot:hover .bulb-bloom,
+.hero-slot.i-hovered .bulb-bloom {
   opacity: 0 !important;
   transform: translate(-50%, -50%) scale(0.6);
 }
 
-/* On hovering 'i': turn off background spotlight and illuminated noise */
-.hero-bulb-backdrop.glow-off,
-.hero-name-container:has(.letter-i:hover) .hero-bulb-backdrop {
-  opacity: 0 !important;
-}
-
-/* On hovering 'i': make the dot of 'i' unfilled and outlined */
-.letter-i:hover .bulb-orb,
-.letter-i.i-hovered .bulb-orb {
+/* Hovering 'i': outline bulb orb */
+.hero-first-name.all-done .hero-slot:hover .hero-dot,
+.hero-slot.i-hovered .hero-dot {
   background: transparent !important;
-  border-color: #ffffff !important;
+  border: 2px solid #ffffff !important;
   box-shadow: none !important;
 }
 
-/* Overlapping script: "Raj" - in vibrant electric lime green matching reference */
+/* Hovering 'i': turn off background spotlight */
+.hero-name-container:has(.hero-slot:hover) .hero-bulb-backdrop,
+.hero-bulb-backdrop.glow-off {
+  opacity: 0 !important;
+}
+
+/* ==============================================================
+   CURSIVE "Raj" SCRIPT WITH HANDWRITING ANIMATION
+   ============================================================== */
 .hero-last-name-script {
   position: absolute;
   right: -0.19em;
   bottom: -0.1em;
-  font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 0.62em;
-  font-weight: 400;
-  color: #7ee81a;
-  letter-spacing: 0.01em;
+  width: 1.45em;
+  height: 0.85em;
   pointer-events: none;
-  filter: drop-shadow(0 0 10px rgba(126, 232, 26, 0.45)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
   z-index: 15;
-  transition: transform 0.3s ease, color 0.3s ease, filter 0.3s ease;
+  opacity: 0;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
 }
 
-.hero-name-container:hover .hero-last-name-script {
+.hero-last-name-script.visible {
+  opacity: 1;
+}
+
+.raj-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 10px rgba(126, 232, 26, 0.45)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7));
+  transition: filter 0.3s ease;
+}
+
+.raj-svg-text {
+  font-family: 'Alex Brush', 'Great Vibes', cursive;
+  font-size: 110px;
+  fill: #7ee81a;
+  letter-spacing: 0.01em;
+  user-select: none;
+  transition: fill 0.3s ease;
+}
+
+/* Glowing pen tip during cursive writing */
+.raj-pen-glow {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #8eff24;
+  box-shadow:
+    0 0 10px #8eff24,
+    0 0 22px #8eff24,
+    0 0 35px rgba(142, 255, 36, 0.85);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 18;
+  animation: penPulse 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes penPulse {
+  0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+}
+
+.hero-name-container:hover .hero-last-name-script.written {
   transform: scale(1.05);
-  color: #8eff24;
+}
+
+.hero-name-container:hover .hero-last-name-script.written .raj-svg {
   filter: drop-shadow(0 0 16px rgba(142, 255, 36, 0.65)) drop-shadow(0 4px 14px rgba(0, 0, 0, 0.8));
 }
 
-/* Resume Button: Rounded rectangle matching mockup */
+.hero-name-container:hover .hero-last-name-script.written .raj-svg-text {
+  fill: #8eff24;
+}
+
+/* ==============================================================
+   RESUME BUTTON
+   ============================================================== */
 .hero-action-container {
   margin-top: clamp(1.4rem, 2.4vw, 2.2rem);
   position: relative;
@@ -351,7 +513,9 @@
   transform: translateY(0);
 }
 
-/* Dynamic Bulb Keyframe Animations */
+/* ==============================================================
+   KEYFRAME ANIMATIONS
+   ============================================================== */
 @keyframes ambientBreathe {
   0% {
     opacity: 0.88;
@@ -365,23 +529,12 @@
 
 @keyframes bloomPulse {
   0% {
-    opacity: 0.9;
+    opacity: 0.88;
     transform: translate(-50%, -50%) scale(0.95);
   }
   100% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1.05);
-  }
-}
-
-@keyframes bulbFlicker {
-  0%, 100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    opacity: 0.98;
-    transform: translate(-50%, -50%) scale(1.02);
   }
 }
 
@@ -396,7 +549,18 @@
   }
 }
 
-/* Responsive adjustments */
+@keyframes heroSettle {
+  0% {
+    transform: scale(1.015);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ==============================================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================================== */
 @media (max-width: 992px) {
   .hero-section {
     padding: 0 2rem;
@@ -411,7 +575,6 @@
   .hero-last-name-script {
     right: -0.15em;
     bottom: -0.08em;
-    font-size: 0.58em;
   }
 
   .hero-resume-btn {
@@ -451,7 +614,7 @@
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  margin-left: 0.28em; /* Offset letter-spacing so text is geometrically centered */
+  margin-left: 0.28em;
   transition: color 0.25s ease;
 }
 
@@ -478,3 +641,15 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .hero-first-name,
+  .hero-slot,
+  .hero-wipe,
+  .hero-dot,
+  .hero-ripple,
+  .hero-glyph,
+  .hero-last-name-script {
+    animation: none !important;
+    transition: none !important;
+  }
+}
