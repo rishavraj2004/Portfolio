@@ -354,23 +354,8 @@ export default function Hero() {
       }}
     >
       <div className="hero-content-wrapper">
-        {/* Role Subtitle */}
-        <div className="hero-subtitle">
-          <span className="subtitle-web">Web</span>{' '}
-          <span className="subtitle-developer">Developer</span>
-        </div>
-
         {/* Big Name Typography with Physics Reveal Animation */}
         <div className="hero-name-container">
-          {/* Background spotlight and illuminated noise behind the letters */}
-          <div 
-            className={`hero-bulb-backdrop ${!stemReady ? 'backdrop-hidden' : ''} ${isIHovered ? 'glow-off' : ''}`} 
-            aria-hidden="true"
-          >
-            <div className="spotlight-glow" />
-            <div className="spotlight-noise" />
-          </div>
-
           <h1 
             className={`hero-first-name${ready ? ' ready' : ''}${allDone ? ' all-done' : ''}`} 
             aria-label="Rishav"
@@ -394,9 +379,6 @@ export default function Hero() {
               onMouseEnter={() => allDone && setIsIHovered(true)}
               onMouseLeave={() => allDone && setIsIHovered(false)}
             >
-              {/* Radial bloom immediately surrounding the bulb */}
-              <span className={`bulb-bloom ${stemReady ? 'bloom-active' : ''}`} aria-hidden="true" />
-
               {/* Stem of the letter 'i' (revealed after dot bounces) */}
               <span ref={glyph} className="hero-glyph">
                 <span className="letter-i-stem">ı</span>
@@ -405,7 +387,7 @@ export default function Hero() {
               {/* Baseline alignment probe */}
               <i ref={base} className="hero-base" />
 
-              {/* Radiant incandescent orb / bouncing dot */}
+              {/* Dot of the letter 'i' (lights turned off) */}
               <span ref={dot} className="hero-dot" />
 
               {/* Impact shockwave ripples on the floor */}
@@ -471,8 +453,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Action Button */}
-        <div className="hero-action-container">
+        {/* Action Button: rendered after all animations complete */}
+        <div className={`hero-action-container ${allDone ? 'visible' : ''}`}>
           <a 
             href="#resume" 
             className="hero-resume-btn"
@@ -487,10 +469,10 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll Down Indicator */}
+      {/* Scroll Down Indicator: rendered after all animations complete */}
       <a 
         href="#about" 
-        className="hero-scroll-indicator"
+        className={`hero-scroll-indicator ${allDone ? 'visible' : ''}`}
         id="scroll-down-btn"
         aria-label="Scroll down"
         onClick={(e) => {

@@ -28,32 +28,6 @@
   animation: heroFadeIn 0.8s ease-out forwards;
 }
 
-/* Subtitle: "Web Developer" */
-.hero-subtitle {
-  font-family: var(--font-sans);
-  font-size: clamp(1.4rem, 2.3vw, 2.15rem);
-  letter-spacing: -0.01em;
-  margin-bottom: 0.75rem;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  position: relative;
-  z-index: 25;
-}
-
-.subtitle-web {
-  color: #ffffff;
-  font-weight: 400;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-}
-
-.subtitle-developer {
-  color: #adb6c6;
-  font-weight: 400;
-  margin-left: 0.45rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-}
-
 /* Main Name Block */
 .hero-name-container {
   position: relative;
@@ -62,72 +36,6 @@
   user-select: none;
   font-size: clamp(5.5rem, 15vw, 13rem);
   line-height: 0.88;
-}
-
-/* ==============================================================
-   BACKDROP: SPOTLIGHT & NOISE REVEALED AROUND THE BULB OF 'i'
-   ============================================================== */
-.hero-bulb-backdrop {
-  position: absolute;
-  top: 0.12em;
-  left: 0.88em; /* Exactly centered at the bulb on the letter 'i' */
-  transform: translate(-50%, -50%);
-  width: 2.2em;
-  height: 2.2em;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 1;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-bulb-backdrop.backdrop-hidden {
-  opacity: 0 !important;
-}
-
-.hero-bulb-backdrop.glow-off {
-  opacity: 0 !important;
-}
-
-/* Soft incandescent light glow on the subtle black background */
-.spotlight-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.09) 0%,
-    rgba(255, 255, 255, 0.03) 30%,
-    transparent 65%
-  );
-  filter: blur(14px);
-  animation: ambientBreathe 4s ease-in-out infinite alternate;
-}
-
-/* Noisy texture revealed gently by the light */
-.spotlight-noise {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background-image: url('/grain.png');
-  background-repeat: repeat;
-  background-size: 110px 110px;
-  -webkit-mask-image: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.72) 20%,
-    rgba(0, 0, 0, 0.2) 48%,
-    transparent 68%
-  );
-  mask-image: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.72) 20%,
-    rgba(0, 0, 0, 0.2) 48%,
-    transparent 68%
-  );
-  opacity: 0.12;
-  mix-blend-mode: screen;
-  animation: ambientBreathe 4s ease-in-out infinite alternate;
 }
 
 /* Big Display Name Text */
@@ -180,7 +88,7 @@
 }
 
 /* ==============================================================
-   ROTATING SLOT FOR 'i' (STEM + GLOWING BULB DOT)
+   ROTATING SLOT FOR 'i' (STEM + DOT)
    ============================================================== */
 .hero-slot {
   position: relative;
@@ -233,7 +141,7 @@
   -webkit-text-stroke: 0px transparent;
 }
 
-/* Letter 's' - lit smoothly on left side facing the glowing bulb */
+/* Letter 's' - lit smoothly on left side */
 .letter-s {
   background: linear-gradient(90deg, #ffffff 0%, #f0f3f8 35%, #d6dbe4 70%, #bac2ce 100%);
   -webkit-background-clip: text;
@@ -262,10 +170,8 @@
 }
 
 /* ==============================================================
-   GLOWING BULB / ORB DOT THAT LIGHTS UP THE SURROUNDINGS
+   DOT OF THE LETTER 'i' (LIGHTS TURNED OFF)
    ============================================================== */
-
-/* The bouncing / glowing bulb dot */
 .hero-dot {
   --trail: 0px;
   position: absolute;
@@ -281,23 +187,21 @@
     #e8edf5 60%,
     #cfd5e2 100%
   );
-  box-shadow:
-    0 0 calc(var(--d, 35px) * 0.45) rgba(255, 255, 255, 0.65),
-    0 0 calc(var(--d, 35px) * 1.1) rgba(255, 255, 255, 0.22);
+  box-shadow: none; /* Lights turned off: no radiant glow halo */
   border: 1.8px solid transparent;
   opacity: 0;
   transform-origin: 50% 100%;
   will-change: transform;
   pointer-events: none;
   z-index: 12;
-  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, background 0.3s ease;
 }
 
 .hero-dot.live {
   opacity: 1;
 }
 
-/* Motion trail behind dot while falling with gravity */
+/* Motion trail behind dot while falling */
 .hero-dot::before {
   content: "";
   position: absolute;
@@ -306,35 +210,8 @@
   bottom: 50%;
   height: var(--trail, 0px);
   border-radius: 999px;
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.55), transparent);
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.25), transparent);
   pointer-events: none;
-}
-
-/* Radiant bloom around the bulb */
-.bulb-bloom {
-  position: absolute;
-  left: calc(var(--x, 0px) + var(--d, 35px) / 2);
-  top: calc(var(--y, 0px) + var(--d, 35px) / 2);
-  transform: translate(-50%, -50%);
-  width: calc(var(--d, 35px) * 2.2);
-  height: calc(var(--d, 35px) * 2.2);
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0.08) 35%,
-    transparent 75%
-  );
-  pointer-events: none;
-  z-index: 10;
-  filter: blur(4px);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.bulb-bloom.bloom-active {
-  opacity: 1;
-  animation: bloomPulse 2.5s ease-in-out infinite alternate;
 }
 
 /* Impact shockwave ripple emitted on each baseline bounce */
@@ -345,10 +222,10 @@
   width: var(--d, 35px);
   height: var(--d, 35px);
   margin-top: calc(-0.5 * var(--d, 35px));
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow: none;
   border-radius: 50%;
-  opacity: 0.8;
+  opacity: 0.7;
   pointer-events: none;
   animation: heroRippleAnim 0.75s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
@@ -356,7 +233,7 @@
 @keyframes heroRippleAnim {
   0% {
     transform: scale(0.6, 0.22);
-    opacity: 0.9;
+    opacity: 0.8;
   }
   100% {
     transform: scale(calc(2 + 3.5 * var(--p, 1)), 0.45);
@@ -378,25 +255,12 @@
   -webkit-text-stroke: 1.8px #ffffff;
 }
 
-/* Hovering 'i': turn off the glowing bloom */
-.hero-first-name.all-done .hero-slot:hover .bulb-bloom,
-.hero-slot.i-hovered .bulb-bloom {
-  opacity: 0 !important;
-  transform: translate(-50%, -50%) scale(0.6);
-}
-
-/* Hovering 'i': outline bulb orb */
+/* Hovering 'i': outline dot */
 .hero-first-name.all-done .hero-slot:hover .hero-dot,
 .hero-slot.i-hovered .hero-dot {
   background: transparent !important;
   border: 2px solid #ffffff !important;
   box-shadow: none !important;
-}
-
-/* Hovering 'i': turn off background spotlight */
-.hero-name-container:has(.hero-slot:hover) .hero-bulb-backdrop,
-.hero-bulb-backdrop.glow-off {
-  opacity: 0 !important;
 }
 
 /* ==============================================================
@@ -470,12 +334,22 @@
 }
 
 /* ==============================================================
-   RESUME BUTTON
+   RESUME BUTTON — APPEARS AFTER ALL ANIMATIONS COMPLETE
    ============================================================== */
 .hero-action-container {
   margin-top: clamp(1.4rem, 2.4vw, 2.2rem);
   position: relative;
   z-index: 20;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-action-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .hero-resume-btn {
@@ -516,28 +390,6 @@
 /* ==============================================================
    KEYFRAME ANIMATIONS
    ============================================================== */
-@keyframes ambientBreathe {
-  0% {
-    opacity: 0.88;
-    transform: scale(0.97);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.03);
-  }
-}
-
-@keyframes bloomPulse {
-  0% {
-    opacity: 0.88;
-    transform: translate(-50%, -50%) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.05);
-  }
-}
-
 @keyframes heroFadeIn {
   0% {
     opacity: 0;
@@ -588,7 +440,7 @@
 }
 
 /* ==============================================================
-   SCROLL DOWN INDICATOR COMPONENT
+   SCROLL DOWN INDICATOR COMPONENT — APPEARS AFTER ANIMATIONS
    ============================================================== */
 .hero-scroll-indicator {
   position: absolute;
@@ -604,8 +456,15 @@
   cursor: pointer;
   z-index: 20;
   user-select: none;
-  transition: color 0.25s ease, transform 0.25s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease, transform 0.25s ease;
   animation: scrollFloat 2.4s ease-in-out infinite;
+}
+
+.hero-scroll-indicator.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .scroll-text {
@@ -648,8 +507,13 @@
   .hero-dot,
   .hero-ripple,
   .hero-glyph,
-  .hero-last-name-script {
+  .hero-last-name-script,
+  .hero-action-container,
+  .hero-scroll-indicator {
     animation: none !important;
     transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
   }
 }
