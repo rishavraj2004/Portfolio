@@ -60,6 +60,44 @@ export default function Hero() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Freeze scrolling until all hero animations complete
+  useEffect(() => {
+    if (allDone) {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      return;
+    }
+
+    // Ensure page starts at the top
+    window.scrollTo(0, 0);
+
+    const preventDefault = (e) => {
+      e.preventDefault();
+    };
+
+    const preventKeys = (e) => {
+      const keys = ['Space', 'PageUp', 'PageDown', 'End', 'Home', 'ArrowUp', 'ArrowDown'];
+      if (keys.includes(e.code) || keys.includes(e.key)) {
+        e.preventDefault();
+      }
+    };
+
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+
+    window.addEventListener('wheel', preventDefault, { passive: false });
+    window.addEventListener('touchmove', preventDefault, { passive: false });
+    window.addEventListener('keydown', preventKeys, { passive: false });
+
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      window.removeEventListener('wheel', preventDefault);
+      window.removeEventListener('touchmove', preventDefault);
+      window.removeEventListener('keydown', preventKeys);
+    };
+  }, [allDone]);
+
   // Main reveal animation loop
   useEffect(() => {
     let raf = 0;
