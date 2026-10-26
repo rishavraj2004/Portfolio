@@ -37,6 +37,8 @@ export default function Hero() {
   const [allDone, setAllDone] = useState(false);
   const [ripples, setRipples] = useState([]);
   const [penPos, setPenPos] = useState(null);
+  const [showBubble, setShowBubble] = useState(false);
+  const [bubbleExited, setBubbleExited] = useState(false);
 
   // Element refs
   const left = useRef(null);
@@ -97,6 +99,32 @@ export default function Hero() {
       window.removeEventListener('keydown', preventKeys);
     };
   }, [allDone]);
+
+  // Speech bubble timer: pops up after mascot renders, shows for ~3 seconds, then disappears for rest of time
+  useEffect(() => {
+    if (!allDone) return;
+
+    // Pop up 400ms after mascot entrance
+    const popTimer = setTimeout(() => {
+      setShowBubble(true);
+    }, 400);
+
+    // Show for 3.2 seconds then disappear for the rest of the time
+    const hideTimer = setTimeout(() => {
+      setShowBubble(false);
+      setBubbleExited(true);
+    }, 3600);
+
+    return () => {
+      clearTimeout(popTimer);
+      clearTimeout(hideTimer);
+    };
+  }, [allDone]);
+
+  const dismissBubbleEarly = () => {
+    setShowBubble(false);
+    setBubbleExited(true);
+  };
 
   // Main reveal animation loop
   useEffect(() => {
@@ -494,9 +522,16 @@ export default function Hero() {
           </div>
 
           {/* Interactive Chibi Mascot rendered after all animations */}
-          <div className={`hero-mascot-wrapper ${allDone ? 'visible' : ''}`}>
-            {/* Speech bubble on the right top */}
-            <div className="mascot-speech-bubble" aria-hidden="true">
+          <div 
+            className={`hero-mascot-wrapper ${allDone ? 'visible' : ''}`}
+            onMouseEnter={dismissBubbleEarly}
+            onClick={dismissBubbleEarly}
+          >
+            {/* Speech bubble: pops up for ~3s after mascot renders, then disappears for rest of time */}
+            <div 
+              className={`mascot-speech-bubble ${showBubble ? 'popped-up' : ''} ${bubbleExited ? 'disappeared' : ''}`} 
+              aria-hidden="true"
+            >
               <span className="bubble-text">Hey, you!</span>
               <span className="bubble-heart">❤️</span>
             </div>

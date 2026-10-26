@@ -83,9 +83,27 @@
   align-items: center;
   gap: 0.38rem;
   white-space: nowrap;
-  pointer-events: none;
-  z-index: 30;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.6);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Popped-up state — pops up after mascot renders and shows for 2-4 seconds */
+.mascot-speech-bubble.popped-up:not(.disappeared) {
+  opacity: 1;
+  transform: translateY(0) scale(1);
   animation: bubbleFloat 3s ease-in-out infinite alternate;
+}
+
+/* Disappears for the rest of the time */
+.mascot-speech-bubble.disappeared,
+.hero-mascot-wrapper:hover .mascot-speech-bubble,
+.hero-mascot-wrapper:active .mascot-speech-bubble {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-10px) scale(0.75) !important;
+  pointer-events: none !important;
+  transition: opacity 0.4s ease, transform 0.4s ease !important;
 }
 
 /* Speech bubble tail pointing towards the mascot */
