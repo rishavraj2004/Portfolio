@@ -39,6 +39,7 @@ export default function Hero() {
   const [penPos, setPenPos] = useState(null);
   const [showBubble, setShowBubble] = useState(false);
   const [bubbleExited, setBubbleExited] = useState(false);
+  const [hasMovedMouse, setHasMovedMouse] = useState(false);
 
   // Element refs
   const left = useRef(null);
@@ -125,6 +126,33 @@ export default function Hero() {
     setShowBubble(false);
     setBubbleExited(true);
   };
+
+  // Until mouse is moved after mascot renders, keep mascot looking straight ahead
+  useEffect(() => {
+    if (!allDone || hasMovedMouse) return;
+
+    let startX = null;
+    let startY = null;
+
+    const handlePointerMove = (e) => {
+      if (startX === null || startY === null) {
+        startX = e.clientX;
+        startY = e.clientY;
+        return;
+      }
+
+      // Detect physical mouse movement beyond jitter threshold
+      const dist = Math.hypot(e.clientX - startX, e.clientY - startY);
+      if (dist >= 4) {
+        setHasMovedMouse(true);
+      }
+    };
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+    };
+  }, [allDone, hasMovedMouse]);
 
   // Main reveal animation loop
   useEffect(() => {
@@ -523,7 +551,7 @@ export default function Hero() {
 
           {/* Interactive Chibi Mascot rendered after all animations */}
           <div 
-            className={`hero-mascot-wrapper ${allDone ? 'visible' : ''}`}
+            className={`hero-mascot-wrapper ${allDone ? 'visible' : ''} ${!hasMovedMouse ? 'look-straight' : ''}`}
             onMouseEnter={dismissBubbleEarly}
             onClick={dismissBubbleEarly}
           >
@@ -541,6 +569,7 @@ export default function Hero() {
               reactions="/mascots/risha-chibi-reactions.webp"
               label="Chibi portrait mascot"
               size={230}
+              className="hero-mascot-btn"
             />
           </div>
         </div>

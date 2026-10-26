@@ -63,6 +63,12 @@
   pointer-events: auto;
 }
 
+/* Until the mouse is moved after mascot renders, keep mascot looking straight at the viewer */
+.hero-mascot-wrapper.look-straight button > span > span:first-child,
+.hero-mascot-wrapper.look-straight .hero-mascot-btn > span > span:first-child {
+  background-position: 50% 50% !important;
+}
+
 /* Speech bubble on top right of the Mascot */
 .mascot-speech-bubble {
   position: absolute;
